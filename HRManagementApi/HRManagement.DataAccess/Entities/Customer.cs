@@ -19,6 +19,8 @@ namespace HRManagement.DataAccess.Entities
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Country { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
         public decimal VAT { get; set; }
         public BillingType BillingType { get; set; }
         public string Details { get; set; }
