@@ -1,8 +1,8 @@
 ﻿using HRManagement.DataAccess.Entities;
 
-namespace HRManagement.Business.Interface
+namespace HRManagement.Business.Services
 {
-    public interface IBusinessLayer
+    public interface IBusinessService
     {
         public void DeleteCustomer(long customerId);
     }

@@ -1,4 +1,4 @@
-﻿using HRManagement.Business.Interface;
+﻿using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,11 +9,11 @@ namespace HRManagementApi.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly IBusinessLayer _businessLayer;
+        private readonly IBusinessService _dataService;
 
-        public CustomerController(IBusinessLayer businessLayer)
+        public CustomerController(IBusinessService businessLayer)
         {
-            _businessLayer = businessLayer;
+            _dataService = businessLayer;
         }
         // GET: api/<CustomerController>
         [HttpGet]
@@ -45,8 +45,8 @@ namespace HRManagementApi.Controllers
         [HttpDelete("{id}")]
         public async Task< ActionResult > Delete(long id)
         {
-            _businessLayer.DeleteCustomer(id);
-            return Ok();
+            _dataService.DeleteCustomer(id);
+            return  Ok();
         }
     }
 }

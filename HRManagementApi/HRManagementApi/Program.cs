@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<HRManagement.DataAccess.Repositories.IDBRepository, HRManagement.DataAccess.Repositories.DBRepository>();
-builder.Services.AddScoped<HRManagement.Business.Interface.IBusinessLayer, HRManagement.Business.Interface.BusinessLayer>();
+builder.Services.AddScoped<HRManagement.Business.Services.IBusinessService, HRManagement.Business.Services.BusinessService>();
 
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
     builder.Configuration["ConnectionStrings:HRManagementAPI.db"]));
