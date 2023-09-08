@@ -2,6 +2,6 @@
 {
     public interface IDBService
     {
-       Task<IEnumerable<Models.CustomerDto>> GetAllCustomers();
+       Task<IEnumerable<Models.CustomerDto>> GetAllCustomers(int pageNumber, int pageSize);
     }
 }

@@ -24,9 +24,9 @@ namespace HRManagementApi.Controllers
 
         [HttpGet("/GetAllCustomers")]
         [HttpGet]
-        public async Task<IEnumerable<CustomerDto>> GetAllCustomers()
+        public async Task<IEnumerable<CustomerDto>> GetAllCustomers(int pageNumber, int pageSize)
         {
-            var allCustomers = await _businessLayer.GetAllCustomers() ;
+            var allCustomers = await _businessLayer.GetAllCustomers(pageNumber,pageSize) ;
             var mappedAllCustomers = allCustomers.Select(_mapper.Map<CustomerDto>);
             return mappedAllCustomers;
         }

@@ -1,5 +1,6 @@
 ﻿using HRManagement.DataAccess.DbContexts;
 using HRManagement.DataAccess.Entities;
+using HRManagement.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRManagement.DataAccess.Services
@@ -13,10 +14,17 @@ namespace HRManagement.DataAccess.Services
             _context = context ?? 
                 throw new ArgumentNullException(nameof(context));
         }
-        public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
+        public async Task<IEnumerable<Customer>> GetAllCustomersAsync(int pageNumber, int pageSize)
         {
-            return await _context.Customers.ToListAsync();
-            //mapare intre business si data access, sa fie global createMap
+            
+            var allCustomers = _context.Customers;
+            var totalItemCount = await allCustomers.CountAsync();
+            var customerTablePagination = new CustomerTablePagination(
+                totalItemCount, pageSize, pageNumber);
+            var allCostomersToReturn = await allCustomers.Skip(pageSize*(pageNumber-1))
+                .Take(pageSize)
+                .ToListAsync();
+            return allCostomersToReturn;
         }
     }
 }

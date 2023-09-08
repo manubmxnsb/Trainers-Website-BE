@@ -14,9 +14,10 @@ namespace HRManagement.Business.Interface
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IEnumerable<CustomerDto>> GetAllCustomers()
+        public async Task<IEnumerable<CustomerDto>> GetAllCustomers(
+            int pageNumber, int pageSize)
         {
-            var allCustomers = await _dataService.GetAllCustomersAsync();
+            var allCustomers = await _dataService.GetAllCustomersAsync(pageNumber, pageSize);
             var mappedAllCustomers = allCustomers.Select(_mapper.Map<CustomerDto>);
             return mappedAllCustomers;
         }
