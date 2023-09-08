@@ -43,7 +43,7 @@ namespace HRManagementApi.Controllers
 
         // DELETE api/<CustomerController>/5
         [HttpDelete("{id}")]
-        public async Task< ActionResult > Delete(long id)
+        public ActionResult Delete(long id)
         {
             _dataService.DeleteCustomer(id);
             return  Ok();
