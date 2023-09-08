@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using HRManagement.Business.Interface;
+using HRManagementApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
 {
@@ -8,36 +8,21 @@ namespace HRManagementApi.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        // GET: api/<CustomerController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IBusinessLayer _customerService;
+
+        public CustomerController(IBusinessLayer customerService)
         {
-            return new string[] { "value1", "value2" };
+            _customerService = customerService ?? throw new ArgumentException(nameof(customerService));
         }
 
-        // GET api/<CustomerController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<CustomerController>
+        //[Route("{id}")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> AddNew(CustomerDtoService customer)
         {
-        }
 
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CustomerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            await _customerService.AddNewCustomer();
+            //await _customerService.SaveChangesAsync();
+            return Ok();
         }
     }
 }
