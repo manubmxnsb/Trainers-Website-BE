@@ -202,7 +202,7 @@ namespace HRManagement.DataAccess.DbContexts
                     CustomerId = 1,
                     Title = "Contract",
                     CreationDate = new DateTime(2023, 09, 01),
-                    Content = new Byte[10],
+                    //Content = new Byte[10],
                 },
                 new Document()
                 {
@@ -210,7 +210,7 @@ namespace HRManagement.DataAccess.DbContexts
                     CustomerId = 1,
                     Title = "Billing Proof",
                     CreationDate = new DateTime(2023, 09, 02),
-                    Content = new Byte[20],
+                    //Content = new Byte[20],
                 },
                 new Document()
                 {
@@ -218,7 +218,7 @@ namespace HRManagement.DataAccess.DbContexts
                     CustomerId = 2,
                     Title = "Billing Proof",
                     CreationDate = new DateTime(2023, 09, 02),
-                    Content = new Byte[20],
+                    //Content = new Byte[20],
                 },
                 new Document()
                 {
@@ -226,7 +226,7 @@ namespace HRManagement.DataAccess.DbContexts
                     CustomerId = 2,
                     Title = "Contract",
                     CreationDate = new DateTime(2023, 09, 01),
-                    Content = new Byte[10],
+                    //Content = new Byte[10],
                 }
             );
 

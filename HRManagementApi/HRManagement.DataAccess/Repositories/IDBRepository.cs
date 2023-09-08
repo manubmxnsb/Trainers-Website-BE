@@ -1,6 +1,6 @@
 ﻿using HRManagement.DataAccess.Entities;
 
-namespace HRManagement.DataAccess.Services
+namespace HRManagement.DataAccess.Repositories
 {
     public interface IDBRepository
     {

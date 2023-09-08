@@ -1,9 +1,9 @@
-﻿using HRManagement.DataAccess.Entities;
+﻿using HRManagement.Business.Models;
 
-namespace HRManagement.Business.Interface
+namespace HRManagement.Business.Services
 {
     public interface IBusinessLayer
     {
-        Task AddNewCustomer();
+        Task AddNewCustomer(CustomerDto customer);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using HRManagement.DataAccess.DbContexts;
 using HRManagement.DataAccess.Entities;
 
-namespace HRManagement.DataAccess.Services
+namespace HRManagement.DataAccess.Repositories
 {
     public class DBRepository : IDBRepository
     {
@@ -15,6 +15,7 @@ namespace HRManagement.DataAccess.Services
         public async Task AddNewCustomerAsync(Customer newCustomer)
         {
             await _context.Customers.AddAsync(newCustomer);
+            await _context.SaveChangesAsync();
         }
     }
 }

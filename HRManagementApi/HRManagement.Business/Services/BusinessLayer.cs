@@ -1,22 +1,26 @@
-﻿using HRManagement.DataAccess.DbContexts;
+﻿using AutoMapper;
+using HRManagement.Business.Models;
 using HRManagement.DataAccess.Entities;
-using HRManagement.DataAccess.Services;
-using Microsoft.EntityFrameworkCore;
+using HRManagement.DataAccess.Repositories;
 
-namespace HRManagement.Business.Interface
+
+namespace HRManagement.Business.Services
 {
     public class BusinessLayer : IBusinessLayer
     {
-        private readonly DBRepository _dataRepository;
+        private readonly IDBRepository _dataRepository;
+        private readonly IMapper _mapper;
 
-        public BusinessLayer(DBRepository dataRepository)
+        public BusinessLayer(IDBRepository dataRepository, IMapper mapper)
         {
             _dataRepository = dataRepository ?? throw new ArgumentNullException(nameof(dataRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task AddNewCustomer()
-        {
-            await _dataRepository.AddNewCustomerAsync(new Customer());
+        public async Task AddNewCustomer(CustomerDto customer)
+        {     
+            var mappedCustomerBusiness = _mapper.Map<Customer>(customer);
+            await _dataRepository.AddNewCustomerAsync(mappedCustomerBusiness);
         }
     }
 }
