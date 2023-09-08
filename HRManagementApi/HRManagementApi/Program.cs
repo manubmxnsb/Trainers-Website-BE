@@ -1,4 +1,7 @@
+using HRManagement.Business.Profiles;
 using HRManagement.DataAccess.DbContexts;
+using HRManagement.DataAccess.Profiles;
+using HRManagement.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +14,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
-    builder.Configuration["ConnectionStrings:HRManagementAPI.db"]));
+    builder.Configuration["ConnectionStrings:DBConnectionString"]));
+
+builder.Services.AddScoped<ICustomerInfoRepository, CustomerInfoRepository>();
+
+builder.Services.AddAutoMapper(typeof(CustomerProfile), typeof(DocumentProfile));
+
+builder.Services.AddControllers(options =>
+{
+    options.ReturnHttpNotAcceptable = true; //Returns not acceptable for unsuported actions
+}).AddXmlDataContractSerializerFormatters();
 
 var app = builder.Build();
 
@@ -24,6 +36,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
 app.MapControllers();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.Run();

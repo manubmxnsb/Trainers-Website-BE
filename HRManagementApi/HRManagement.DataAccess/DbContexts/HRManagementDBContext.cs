@@ -19,7 +19,7 @@ namespace HRManagement.DataAccess.DbContexts
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(
-              "Data Source = RTB28\\LOCALDB;Initial Catalog = HRManagement; Integrated Security=SSPI;TrustServerCertificate=true;"
+              "Data Source = (localdb)\\First_DB;Initial Catalog = HRManagement; Integrated Security=SSPI;TrustServerCertificate=true;"
             );
         }
         public HRManagementDBContext(DbContextOptions<HRManagementDBContext> options) : base(options) { }

@@ -1,43 +1,39 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using HRManagement.Business.Models;
+using HRManagement.DataAccess.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HRManagementApi.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
+    [Route("api/customers")]
     public class CustomerController : ControllerBase
     {
-        // GET: api/<CustomerController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ICustomerInfoRepository _customerInfoRepository;
+        private readonly IMapper _mapper;
+
+        public CustomerController(ICustomerInfoRepository customerInfoRepository, IMapper mapper)
         {
-            return new string[] { "value1", "value2" };
+            _customerInfoRepository = customerInfoRepository ?? throw new ArgumentNullException(nameof(customerInfoRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        // GET api/<CustomerController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetCustomer(int id, bool includeDocuments = false)
         {
-            return "value";
-        }
-
-        // POST api/<CustomerController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CustomerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var customer = await _customerInfoRepository.GetCustomerAsync(id, includeDocuments);
+            if(customer == null)
+            {
+                return NotFound();
+            }
+            if(includeDocuments)
+            {
+                return Ok(_mapper.Map<CustomerDTO>(customer));
+            }
+            return (Ok(_mapper.Map<CustomerWithoutDocumentsDTO>(customer)));
         }
     }
 }
