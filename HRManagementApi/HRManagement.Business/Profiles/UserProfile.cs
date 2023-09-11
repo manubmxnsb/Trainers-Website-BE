@@ -10,6 +10,10 @@ namespace HRManagement.Business.Profiles
         {
             CreateMap<UserDto,User>();
             CreateMap<User, UserDto>();
+            CreateMap<UserWithEventsDto, User>();
+            CreateMap<User, UserWithEventsDto>();
+            CreateMap<Event,EventsDto>();
+
         }
     }
 }

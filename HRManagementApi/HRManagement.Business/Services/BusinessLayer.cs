@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
-using HRManagement.DataAccess.DbContexts;
 using HRManagement.DataAccess.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+
+
 
 namespace HRManagement.Business.Services
 {
@@ -22,6 +23,31 @@ namespace HRManagement.Business.Services
         {
             var user = await _dBRepository.GetUserAsync(userID);
             return (_mapper.Map<UserDto>(user));
+        }
+
+        //public async Task<ActionResult<IEnumerable<EventsDto>>> GetEvents(long userId)
+        //{
+        //  var events = await _dBRepository.GetEventsForCityAsync(userId);
+        // // return (_mapper.Map<IEnumerable<EventsDto>>(events));
+
+        //}
+        public async Task<IEnumerable<EventsDto>> GetEvents(long userId)
+        {
+            var events = await _dBRepository.GetEventsForCityAsync(userId);
+             return (_mapper.Map<IEnumerable<EventsDto>>(events));
+
+        }
+
+        public async Task<UserWithEventsDto> GetUserWithEvents(long userID, bool includeEvents)
+        {
+            var user = await _dBRepository.GetUserWithEventsAsync(userID, includeEvents);
+            return (_mapper.Map<UserWithEventsDto>(user));
+            //if(user == null) {
+            //    return NotFound();
+            //}
+
+            //return (_mapper.Map<UserDto>(user));
+
         }
     }
 }

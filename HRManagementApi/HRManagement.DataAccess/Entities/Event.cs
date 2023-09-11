@@ -18,6 +18,11 @@ namespace HRManagement.DataAccess.Entities
         public DateTime Date { get; set; }
         public LocationType Location { get; set; }
         public EventType Type { get; set; }
+
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
+        public long UserId { get; set; }
+
     }
     public enum LocationType
     {

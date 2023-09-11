@@ -18,7 +18,7 @@ namespace HRManagementApi.Controllers
             _business = business ?? throw new ArgumentNullException(nameof(business));
         }
 
-      
+
         [HttpGet("{id}")]
 
         public async Task<ActionResult> GetUser(long id)
@@ -30,6 +30,23 @@ namespace HRManagementApi.Controllers
             }
 
             else { return NotFound(); }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetUserWithEvents(long id, bool includeEvents )
+        {
+            var user = await _business.GetUserWithEvents(id, includeEvents);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            if(includeEvents) { 
+                return Ok(user);
+            }
+           else { return NotFound(user); }  
+
+          //  return Ok(user);
+      
         }
         //// GET: api/<UserController>
         //[HttpGet]

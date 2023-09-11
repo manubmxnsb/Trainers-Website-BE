@@ -9,7 +9,9 @@ namespace HRManagement.DataAccess.Repositories
     {
 
         Task<User?> GetUserAsync(long userID);
-        //Task<User?> GetUserWithEventsAsync(long userID, bool includeEvents);
+        Task<User?> GetUserWithEventsAsync(long userID, bool includeEvents);
+        Task<IEnumerable<Event>> GetEventsForCityAsync(long userID);   
+        Task<bool> UserExistsAsync(long userID);
     
     }
 }

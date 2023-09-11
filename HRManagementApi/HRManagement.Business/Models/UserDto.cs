@@ -17,7 +17,7 @@ namespace HRManagement.Business.Models
         public required string Department { get; set; }
         public byte[] Picture { get; set; }
         public string PhoneNumber { get; set; }
-        public Event[] Events { get; set; }
+        public ICollection<EventsDto> Events { get; set; } = new List<EventsDto>();
         public int DaysOff { get; set; }
       
     }
