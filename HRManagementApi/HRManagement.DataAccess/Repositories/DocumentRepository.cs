@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HRManagement.DataAccess.Services
 {
-    internal class DBService
+    public class DocumentRepository
     {
     }
 }

@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using HRManagement.Business.Models;
+using AutoMapper;
+using HRManagement.DataAccess.Repositories;
+using HRManagement.Business.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +12,55 @@ namespace HRManagementApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IBusinessLayer _business;
+        public UserController(IBusinessLayer business)
         {
-            return new string[] { "value1", "value2" };
+            _business = business ?? throw new ArgumentNullException(nameof(business));
         }
 
-        // GET api/<UserController>/5
+      
         [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> GetUser(long id)
         {
-        }
+            var user = await _business.GetUser(id);
+            if (user != null)
+            {
+                return Ok(user);     
+            }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            else { return NotFound(); }
         }
+        //// GET: api/<UserController>
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// GET api/<UserController>/5
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
+
+        //// POST api/<UserController>
+        //[HttpPost]
+        //public void Post([FromBody] string value)
+        //{
+        //}
+
+        //// PUT api/<UserController>/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
+
+        //// DELETE api/<UserController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
