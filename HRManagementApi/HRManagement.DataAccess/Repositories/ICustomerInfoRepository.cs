@@ -13,5 +13,6 @@ namespace HRManagement.DataAccess.Repositories
         Task<IEnumerable<Document>> GetDocumentsForCustomerAsync(long customerId);
         Task<Document> GetDocumentForCustomerAsync(long customerId, long documentId);
         Task<bool> CustomerExistsAsync(long cityId);
+        Task<bool> SaveChangesAsync();
     }
 }

@@ -22,7 +22,7 @@ namespace HRManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCustomer(int id, bool includeDocuments = false)
+        public async Task<ActionResult<CustomerDTO>> GetCustomer(int id, bool includeDocuments = false)
         {
             var customer = await _customerInfoRepository.GetCustomerAsync(id, includeDocuments);
             if(customer == null)

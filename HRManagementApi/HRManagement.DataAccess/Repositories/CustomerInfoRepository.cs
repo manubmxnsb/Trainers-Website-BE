@@ -34,22 +34,22 @@ namespace HRManagement.DataAccess.Repositories
                 .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Document>> GetDocumentForCustomerAsync(long customerId)
+        public async Task<IEnumerable<Document>> GetDocumentsForCustomerAsync(long customerId)
         {
             return await _context.Documents
                 .Where(p => p.CustomerId == customerId).ToListAsync();
         }
 
-        public async Task<Document> GetDocumentForCustomerAsync(long customerId, long documentId)
+        public async Task<Document>? GetDocumentForCustomerAsync(long customerId, long documentId)
         {
             return await _context.Documents
                 .Where(p => p.CustomerId == customerId && p.Id == documentId)
                 .FirstOrDefaultAsync();
         }
 
-        public Task<IEnumerable<Document>> GetDocumentsForCustomerAsync(long customerId)
+        public async Task<bool> SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            return (await _context.SaveChangesAsync() >= 0);
         }
     }
 }

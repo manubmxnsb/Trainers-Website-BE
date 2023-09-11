@@ -34,12 +34,12 @@ namespace HRManagementApi.Controllers
             {
                 return NotFound();
             }
-            var customer = await _customerInfoRepository.GetDocumentForCustomerAsync(customerId, documentId);
-            if (customer == null)
+            var document = await _customerInfoRepository.GetDocumentForCustomerAsync(customerId, documentId);
+            if (document == null)
             {
                 return NotFound();
             }
-            return Ok(_mapper.Map<DocumentDTO>(customer));
+            return Ok(_mapper.Map<DocumentDTO>(document));
         }
     }
 }
