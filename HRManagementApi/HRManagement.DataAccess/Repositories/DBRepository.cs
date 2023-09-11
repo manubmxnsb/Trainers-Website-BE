@@ -30,38 +30,15 @@ namespace HRManagement.DataAccess.Repositories
         }
 
 
-        public async Task<Customer> EditCustomer(Customer customerToUpdate)
+        public async Task<bool> CustomerExistsAsync(long customerId)
         {
-            var customer = await CustomerExists(customerToUpdate.Id);
-
-            customer.Id = customerToUpdate.Id;
-            customer.Name = customerToUpdate.Name;
-            customer.Email = customerToUpdate.Email;
-            customer.Address = customerToUpdate.Address;
-            customer.PhoneNumber = customerToUpdate.PhoneNumber;
-            customer.Country = customerToUpdate.Country;
-            customer.VAT = customerToUpdate.VAT;
-            customer.BillingType = customerToUpdate.BillingType;
-            customer.Details = customerToUpdate.Details;
-            customer.IsActive = customerToUpdate.IsActive;
-            customer.DateCreated = customerToUpdate.DateCreated;
-            customer.Documents = customerToUpdate.Documents;
-
-            _context.Customers.Update(customer);
-            await(_context.SaveChangesAsync());
-            return customer;
+            return await _context.Customers.AnyAsync(c => c.Id == customerId);
         }
 
-        public async Task<Customer> CustomerExists(long? customerId)
+        public async Task<bool> SaveChangesAsync()
         {
-            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == customerId);
-            if (customer == null)
-                return null;
-            else
-                return customer;
-
+            return (await _context.SaveChangesAsync() >= 0);
         }
-
         
     }
 }

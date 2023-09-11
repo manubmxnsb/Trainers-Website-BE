@@ -1,4 +1,5 @@
 ﻿using HRManagement.DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace HRManagement.DataAccess.Repositories
 {
     public interface IDBRepository
     { 
-        public Task<Customer> EditCustomer(Customer customer);
-
-        public Task<Customer> CustomerExists(long? customerId);
 
         Task<Customer?> GetCustomerAsync(long customerId, bool includeDocuments);
+
+        public Task<bool> CustomerExistsAsync(long customerId);
+
+        public Task<bool> SaveChangesAsync();
+        
     }
 }

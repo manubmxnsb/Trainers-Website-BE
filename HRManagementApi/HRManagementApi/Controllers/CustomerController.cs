@@ -18,89 +18,97 @@ namespace HRManagementApi.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IDBService _dbService;
+        private readonly IDBRepository _repository;
         private readonly IMapper _mapper;
 
-        public CustomerController(IDBService dbService, IMapper mapper)
+        public CustomerController(IDBService dbService, IMapper mapper, IDBRepository repository)
         {
             _dbService = dbService ?? throw new ArgumentNullException(nameof(dbService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetCustomer(int id, bool includeDocuments = false)
-        //{
-        //    var customer = await _dbService.GetCustomer(id, includeDocuments);
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    if (includeDocuments)
-        //    {
-        //        return Ok(_mapper.Map<CustomerDto>(customer));
-        //    }
-        //    return (Ok(_mapper.Map<CustomerWithoutDocumentDto>(customer)));
-        //}
-
-
-        [HttpPut("{customerId}")]
-        public async Task<ActionResult> EditCustomer(int customerId, CustomerForEditDto customerDto)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCustomer(int id, bool includeDocuments = false)
         {
-            var customerEntity = _mapper.Map<Customer>(customerDto);
+            var customer = await _repository.GetCustomerAsync(id, includeDocuments);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            if (includeDocuments)
+            {
+                return Ok(_mapper.Map<CustomerDto>(customer));
+            }
+            return (Ok(_mapper.Map<CustomerWithoutDocumentDto>(customer)));
+        }
+
+
+        [HttpPut("{id}")]
+
+        public async Task<ActionResult> EditCustomer(long id,
+            CustomerForEditDto customerToUpdate)
+        {
+            if (!await _repository.CustomerExistsAsync(id))
+            {
+                return NotFound();
+            }
+
+            var customerEntity = await _repository
+                    .GetCustomerAsync(id, false);
+            if (customerEntity == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(customerToUpdate, customerEntity);
+
+            await _repository.SaveChangesAsync();
+
+            return NoContent();
+
+
+        }
+
+        //edit customer partially
+
+        [HttpPatch("{id}")]
+
+        public async Task<ActionResult> PartiallyEditCustomer(
+            int id, JsonPatchDocument<CustomerForEditDto> patchDocument)
+        {
+            if (!await _repository.CustomerExistsAsync(id)) { return NotFound(); }
+
+            var customerEntity = await _repository
+                .GetCustomerAsync(id, false);
 
             if (customerEntity == null)
             {
                 return NotFound();
             }
 
-            //var customerEntity = new Customer();
-            //customerEntity.Name = "Name";
-            //customerEntity.Name = customerDto.Name;
-            var customer = _mapper.Map<Customer>(customerDto);
+            var customerToPatch = _mapper.Map<CustomerForEditDto>(customerEntity);
 
+            patchDocument.ApplyTo(customerToPatch, ModelState);
 
-            await _dbService.EditCustomer(customerEntity);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!TryValidateModel(customerToPatch))
+            {
+                return BadRequest(ModelState);
+            }
+
+            _mapper.Map(customerToPatch, customerEntity);
+
+            await _repository.SaveChangesAsync();
+
             return NoContent();
+
+
         }
-
-        //edit customer partially
-
-        //[HttpPatch("{customerId}")]
-
-        //public async Task<ActionResult> PartiallyEditCustomer(
-        //    int customerId, JsonPatchDocument<CustomerForEditDto> patchDocument)
-        //{
-        //    //if (!await _dbService.CustomerExists(customerId)) { return NotFound(); }
-
-        //    var customerEntity = await _dbService
-        //        .GetCustomerAsync(customerId, false);
-
-        //    if (customerEntity == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var customerToPatch = _mapper.Map<CustomerForEditDto>(customerEntity);
-
-        //    patchDocument.ApplyTo(customerToPatch, ModelState);
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (!TryValidateModel(customerToPatch))
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    _mapper.Map(customerToPatch, customerEntity);
-
-        //    //await _dbService.SaveChanges();
-
-        //    return NoContent();
-
-
-        //}
     }
 
 

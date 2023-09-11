@@ -19,16 +19,5 @@ namespace HRManagement.Business.Interface
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<Customer> EditCustomer(Customer customerToUpdate)
-        {
-            var customer = await _repository.EditCustomer(customerToUpdate);
-            return customer;
-        }
-
-        public async Task<CustomerDto> GetCustomer(long id, bool includeDocuments)
-        {
-            var customer = await _repository.GetCustomerAsync(id, includeDocuments);
-            return (_mapper.Map<CustomerDto>(customer));
-        }
     }
 }

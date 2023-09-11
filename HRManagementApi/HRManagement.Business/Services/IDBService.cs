@@ -6,9 +6,9 @@ namespace HRManagement.Business.Interface
     public interface IDBService
     {
 
-        public Task<Customer> EditCustomer(Customer customerToUpdate);
+        //public Task<Customer> EditCustomer(Customer customerToUpdate);
 
-        Task<CustomerDto> GetCustomer(long id, bool includeDocuments);
+        //Task<CustomerDto> GetCustomer(long id, bool includeDocuments);
 
     }
 }
