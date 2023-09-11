@@ -32,8 +32,17 @@ namespace HRManagement.DataAccess.Repositories
 
         public async Task<bool> CustomerExistsAsync(long customerId)
         {
+           
             return await _context.Customers.AnyAsync(c => c.Id == customerId);
+      
         }
+
+        public async Task EditCustomer(Customer customerToUpdate)
+        {
+
+            _context.Customers.Update(customerToUpdate);
+           
+        } 
 
         public async Task<bool> SaveChangesAsync()
         {

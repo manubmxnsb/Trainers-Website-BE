@@ -18,30 +18,15 @@ namespace HRManagementApi.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IDBService _dbService;
-        private readonly IDBRepository _repository;
         private readonly IMapper _mapper;
 
-        public CustomerController(IDBService dbService, IMapper mapper, IDBRepository repository)
+        public CustomerController(IDBService dbService, IMapper mapper)
         {
             _dbService = dbService ?? throw new ArgumentNullException(nameof(dbService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCustomer(int id, bool includeDocuments = false)
-        {
-            var customer = await _repository.GetCustomerAsync(id, includeDocuments);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-            if (includeDocuments)
-            {
-                return Ok(_mapper.Map<CustomerDto>(customer));
-            }
-            return (Ok(_mapper.Map<CustomerWithoutDocumentDto>(customer)));
-        }
+
 
 
         [HttpPut("{id}")]
@@ -49,61 +34,14 @@ namespace HRManagementApi.Controllers
         public async Task<ActionResult> EditCustomer(long id,
             CustomerForEditDto customerToUpdate)
         {
-            if (!await _repository.CustomerExistsAsync(id))
+            if (!await _dbService.CustomerExistsAsync(id))
             {
                 return NotFound();
             }
 
-            var customerEntity = await _repository
-                    .GetCustomerAsync(id, false);
-            if (customerEntity == null)
-            {
-                return NotFound();
-            }
+            await _dbService.EditCustomer(id, customerToUpdate);
 
-            _mapper.Map(customerToUpdate, customerEntity);
-
-            await _repository.SaveChangesAsync();
-
-            return NoContent();
-
-
-        }
-
-        //edit customer partially
-
-        [HttpPatch("{id}")]
-
-        public async Task<ActionResult> PartiallyEditCustomer(
-            int id, JsonPatchDocument<CustomerForEditDto> patchDocument)
-        {
-            if (!await _repository.CustomerExistsAsync(id)) { return NotFound(); }
-
-            var customerEntity = await _repository
-                .GetCustomerAsync(id, false);
-
-            if (customerEntity == null)
-            {
-                return NotFound();
-            }
-
-            var customerToPatch = _mapper.Map<CustomerForEditDto>(customerEntity);
-
-            patchDocument.ApplyTo(customerToPatch, ModelState);
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (!TryValidateModel(customerToPatch))
-            {
-                return BadRequest(ModelState);
-            }
-
-            _mapper.Map(customerToPatch, customerEntity);
-
-            await _repository.SaveChangesAsync();
+            await _dbService.SaveChangesAsync();
 
             return NoContent();
 
@@ -111,5 +49,47 @@ namespace HRManagementApi.Controllers
         }
     }
 
+        //edit customer partially
 
+        //    [HttpPatch("{id}")]
+
+        //    public async Task<ActionResult> PartiallyEditCustomer(
+        //        int id, JsonPatchDocument<CustomerForEditDto> patchDocument)
+        //    {
+        //        if (!await _repository.CustomerExistsAsync(id)) { return NotFound(); }
+
+        //        var customerEntity = await _repository
+        //            .GetCustomerAsync(id, false);
+
+        //        if (customerEntity == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        var customerToPatch = _mapper.Map<CustomerForEditDto>(customerEntity);
+
+        //        patchDocument.ApplyTo(customerToPatch, ModelState);
+
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return BadRequest(ModelState);
+        //        }
+
+        //        if (!TryValidateModel(customerToPatch))
+        //        {
+        //            return BadRequest(ModelState);
+        //        }
+
+        //        _mapper.Map(customerToPatch, customerEntity);
+
+        //        await _repository.SaveChangesAsync();
+
+        //        return NoContent();
+
+
+        //    }
+        //}
+
+
+    
 }

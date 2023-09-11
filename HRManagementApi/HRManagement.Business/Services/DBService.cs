@@ -5,6 +5,7 @@ using HRManagement.DataAccess.Entities;
 using HRManagement.DataAccess.Repositories;
 using HRManagement.DataAccess.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace HRManagement.Business.Interface
 {
@@ -19,5 +20,41 @@ namespace HRManagement.Business.Interface
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        public async Task EditCustomer(long id, CustomerForEditDto customerToUpdate)
+        {
+
+            Customer customer = await _repository.GetCustomerAsync(id, false);
+
+            if (customer == null)
+            {
+                throw new Exception("customer doesn't exist");
+            }
+
+            customer.Name = customerToUpdate.Name;
+            customer.Email = customerToUpdate.Email;
+            customer.Address = customerToUpdate.Address;
+            customer.PhoneNumber = customerToUpdate.PhoneNumber;
+            customer.Country = customerToUpdate.Country;
+            customer.VAT = customerToUpdate.VAT;
+            customer.BillingType = customerToUpdate.BillingType;
+            customer.Details = customerToUpdate.Details;
+            customer.IsActive = customerToUpdate.IsActive;
+            customer.DateCreated = customerToUpdate.DateCreated;
+
+            //var customerEdit = _mapper.Map<Customer>(customerToUpdate);
+            _repository.EditCustomer(customer);
+                
+        }
+
+        public Task<bool> CustomerExistsAsync(long id)
+        {
+            return _repository.CustomerExistsAsync(id);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            var changes = await _repository.SaveChangesAsync();
+            return changes;
+        }
     }
 }
