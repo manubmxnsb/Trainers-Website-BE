@@ -28,7 +28,7 @@ namespace HRManagement.DataAccess.Entities
         public string Details { get; set; }
         public bool IsActive { get; set; }
         public DateTime DateCreated { get; set; }
-        //public ICollection<Document> Documents { get; set; }
+        public ICollection<Document> Documents { get; set; }
     }
     public enum BillingType
     {

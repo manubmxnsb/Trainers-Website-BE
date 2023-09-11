@@ -10,10 +10,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddSwaggerGen(options =>
-//{
-//    options.CustomSchemaIds(type => type.ToString());
-//});
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(type => type.ToString());
+});
 
 builder.Services.AddScoped<HRManagement.DataAccess.Repositories.IDBRepository, HRManagement.DataAccess.Repositories.DBRepository>();
 builder.Services.AddScoped<HRManagement.Business.Services.IBusinessLayer, HRManagement.Business.Services.BusinessLayer>();

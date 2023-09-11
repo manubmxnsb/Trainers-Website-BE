@@ -5,12 +5,12 @@ using HRManagementApi.Models;
 
 namespace HRManagementApi.Profiles
 {
-    public class CustomerProfile : Profile
+    public class DocumentProfile : Profile
     {
-        public CustomerProfile()
+        public DocumentProfile()
         {
-            CreateMap<CustomerDtoApi,CustomerDto>();
-            CreateMap<CustomerDto, Customer>();
+            CreateMap<DocumentDtoApi, DocumentDto>();
+            CreateMap<DocumentDto, Document>();
         }
     }
 }

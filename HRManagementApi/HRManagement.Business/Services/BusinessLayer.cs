@@ -22,5 +22,11 @@ namespace HRManagement.Business.Services
             var mappedCustomerBusiness = _mapper.Map<Customer>(customer);
             await _dataRepository.AddNewCustomerAsync(mappedCustomerBusiness);
         }
+
+        public async Task DeleteDocuments (long customerId, long documentId)
+        {
+            await _dataRepository.GetDocumentForCustomerAsync(customerId, documentId);
+            await _dataRepository.DeleteDocumentsAsync(documentId);
+        }
     }
 }
