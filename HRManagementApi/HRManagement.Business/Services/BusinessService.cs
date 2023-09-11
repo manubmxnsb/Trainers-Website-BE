@@ -1,4 +1,5 @@
-﻿using HRManagement.DataAccess.DbContexts;
+﻿using HRManagement.Business.Models;
+using HRManagement.DataAccess.DbContexts;
 using HRManagement.DataAccess.Entities;
 using HRManagement.DataAccess.Repositories;
 using HRManagement.DataAccess.Services;
@@ -15,10 +16,9 @@ namespace HRManagement.Business.Services
             _dataRepository = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
 
-        public void DeleteCustomer(long customerId)
+        public async Task DeleteCustomer(CustomersForDeletionDto customerIdsDto)
         {
-
-            _dataRepository.Delete(customerId);
+           await _dataRepository.Delete(customerIdsDto.Ids);
         }
 
     }

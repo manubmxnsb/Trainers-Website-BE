@@ -18,18 +18,18 @@ namespace HRManagement.DataAccess.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public void Delete(long customerId)
+        public async Task Delete(long[] customerIds)
         {
-            var customerToBeDeleted = _context.Customers.Where(c => c.Id == customerId).FirstOrDefault();
-            if (customerToBeDeleted != null)
+           var customers =  await _context.Customers.Where(c => customerIds.Contains(c.Id)).ToListAsync();
+            if (customers != null)
             {
-                _context.Customers.Remove(customerToBeDeleted);
-                _context.SaveChanges();
+                    _context.Customers.RemoveRange(customers);
+                    await _context.SaveChangesAsync();
             }
             else {
-                throw new InvalidOperationException($"No Customer with customer Id: {customerId} was found!");
+                throw new InvalidOperationException($"No customers were found");
             }
-
+           
         }
     }
 }

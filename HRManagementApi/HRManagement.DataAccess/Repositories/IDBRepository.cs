@@ -10,6 +10,6 @@ namespace HRManagement.DataAccess.Repositories
 {
     public interface IDBRepository
     {
-        public void Delete(long customerId);
+        public Task Delete(long[] customerIds);
     }
 }

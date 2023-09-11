@@ -1,4 +1,5 @@
-﻿using HRManagement.Business.Services;
+﻿using HRManagement.Business.Models;
+using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -42,10 +43,10 @@ namespace HRManagementApi.Controllers
         }
 
         // DELETE api/<CustomerController>/5
-        [HttpDelete("{id}")]
-        public ActionResult Delete(long id)
+        [HttpDelete]
+        public async Task< ActionResult > Delete([FromBody] CustomersForDeletionDto customerIdsDto)
         {
-            _dataService.DeleteCustomer(id);
+            await _dataService.DeleteCustomer(customerIdsDto);
             return  Ok();
         }
     }

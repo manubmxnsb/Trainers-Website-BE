@@ -1,9 +1,10 @@
-﻿using HRManagement.DataAccess.Entities;
+﻿using HRManagement.Business.Models;
+using HRManagement.DataAccess.Entities;
 
 namespace HRManagement.Business.Services
 {
     public interface IBusinessService
     {
-        public void DeleteCustomer(long customerId);
+        public Task DeleteCustomer(CustomersForDeletionDto customerIdsDto);
     }
 }

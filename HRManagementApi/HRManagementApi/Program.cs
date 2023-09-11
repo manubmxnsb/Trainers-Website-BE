@@ -13,7 +13,7 @@ builder.Services.AddScoped<HRManagement.DataAccess.Repositories.IDBRepository, H
 builder.Services.AddScoped<HRManagement.Business.Services.IBusinessService, HRManagement.Business.Services.BusinessService>();
 
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
-    builder.Configuration["ConnectionStrings:HRManagementAPI.db"]));
+    builder.Configuration["ConnectionStrings:HRManagementDBConnectionString"]));
 
 var app = builder.Build();
 
