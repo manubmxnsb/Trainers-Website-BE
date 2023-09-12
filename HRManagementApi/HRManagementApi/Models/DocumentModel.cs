@@ -1,6 +1,6 @@
-﻿namespace HRManagement.Business.Models
+﻿namespace HRManagementApi.Models
 {
-    public class DocumentDto
+    public class DocumentModel
     {
         public string Title { get; set; }
         public DateTime CreationDate { get; set; }

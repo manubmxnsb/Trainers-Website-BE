@@ -9,7 +9,7 @@ namespace HRManagementApi.Profiles
     {
         public DocumentProfile()
         {
-            CreateMap<DocumentDtoApi, DocumentDto>();
+            CreateMap<DocumentModel, DocumentDto>();
             CreateMap<DocumentDto, Document>();
         }
     }

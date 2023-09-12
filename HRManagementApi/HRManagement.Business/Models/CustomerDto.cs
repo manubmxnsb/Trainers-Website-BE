@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace HRManagement.Business.Models
+﻿namespace HRManagement.Business.Models
 {
     public class CustomerDto
     {

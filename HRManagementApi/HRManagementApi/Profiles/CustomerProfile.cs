@@ -9,10 +9,8 @@ namespace HRManagementApi.Profiles
     {
         public CustomerProfile()
         {
-            CreateMap<CustomerDtoApi,CustomerDto>();
+            CreateMap<CustomerModel,CustomerDto>();
             CreateMap<CustomerDto, Customer>();
-            CreateMap<DocumentDtoApi, DocumentDto>();
-            CreateMap<DocumentDto, Document>();
         }
     }
 }
