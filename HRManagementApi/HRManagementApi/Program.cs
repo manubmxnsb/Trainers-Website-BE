@@ -9,8 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<HRManagement.DataAccess.Repositories.IDBRepository, HRManagement.DataAccess.Repositories.DBRepository>();
-builder.Services.AddScoped<HRManagement.Business.Services.IBusinessService, HRManagement.Business.Services.BusinessService>();
+builder.Services.AddScoped<HRManagement.DataAccess.Repositories.ICustomerRepository, HRManagement.DataAccess.Repositories.CustomerRepository>();
+builder.Services.AddScoped<HRManagement.Business.Services.ICustomerService, HRManagement.Business.Services.CustomerService>();
 
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
     builder.Configuration["ConnectionStrings:HRManagementDBConnectionString"]));

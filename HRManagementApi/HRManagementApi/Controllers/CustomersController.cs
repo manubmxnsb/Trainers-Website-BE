@@ -1,5 +1,4 @@
-﻿using HRManagement.Business.Models;
-using HRManagement.Business.Services;
+﻿using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -8,13 +7,13 @@ namespace HRManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomersController : ControllerBase
     {
-        private readonly IBusinessService _dataService;
+        private readonly ICustomerService _customerService;
 
-        public CustomerController(IBusinessService businessLayer)
+        public CustomersController(ICustomerService customerService)
         {
-            _dataService = businessLayer;
+            _customerService = customerService;
         }
         // GET: api/<CustomerController>
         [HttpGet]
@@ -44,9 +43,9 @@ namespace HRManagementApi.Controllers
 
         // DELETE api/<CustomerController>/5
         [HttpDelete]
-        public async Task< ActionResult > Delete([FromBody] CustomersForDeletionDto customerIdsDto)
+        public async Task< ActionResult > Delete([FromBody] long[] customerIds)
         {
-            await _dataService.DeleteCustomer(customerIdsDto);
+            await _customerService.DeleteCustomer(customerIds);
             return  Ok();
         }
     }
