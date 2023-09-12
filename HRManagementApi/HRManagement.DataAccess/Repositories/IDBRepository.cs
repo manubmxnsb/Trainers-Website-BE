@@ -6,8 +6,7 @@ namespace HRManagement.DataAccess.Repositories
     {
         Task AddNewCustomerAsync(Customer newCustomer);
 
-        Task<Document> GetDocumentForCustomerAsync(long customerId, long documentId);
+        Task<Document> GetDocumentForCustomerAsync(long customerId, long documentsId);
         Task DeleteDocumentsAsync(long documentId);
-
     }
 }

@@ -19,10 +19,10 @@ namespace HRManagement.DataAccess.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Document>? GetDocumentForCustomerAsync(long customerId, long documentId)
+        public async Task<Document>? GetDocumentForCustomerAsync(long customerId, long documentsId)
         {
             return await _context.Documents
-                .Where(p => p.CustomerId == customerId && p.Id == documentId)
+                .Where(p => p.CustomerId == customerId && p.Id == documentsId)
                 .FirstOrDefaultAsync();
         }
 

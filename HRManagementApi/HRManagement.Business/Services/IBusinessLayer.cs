@@ -6,6 +6,6 @@ namespace HRManagement.Business.Services
     {
         Task AddNewCustomer(CustomerDto customer);
 
-        Task DeleteDocuments(long customerId, long documentId);
+        Task DeleteDocuments(long customerId, long[] documentId);
     }
 }

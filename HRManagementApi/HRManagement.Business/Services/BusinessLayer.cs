@@ -23,10 +23,14 @@ namespace HRManagement.Business.Services
             await _dataRepository.AddNewCustomerAsync(mappedCustomerBusiness);
         }
 
-        public async Task DeleteDocuments (long customerId, long documentId)
+        public async Task DeleteDocuments (long customerId, long[] documentsId)
         {
-            await _dataRepository.GetDocumentForCustomerAsync(customerId, documentId);
-            await _dataRepository.DeleteDocumentsAsync(documentId);
+            foreach ( var doc in documentsId )
+            {
+                await _dataRepository.GetDocumentForCustomerAsync(customerId, doc);
+                await _dataRepository.DeleteDocumentsAsync(doc);
+            }
+            
         }
     }
 }

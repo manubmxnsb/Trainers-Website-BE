@@ -16,13 +16,9 @@ namespace HRManagementApi.Controllers
         }
 
         [HttpDelete("/{customerId}/documentsDelete")]
-        public async Task<ActionResult> DeleteDocumentsOnEdit(long customerId, long[] documentId)
+        public async Task<ActionResult> DeleteDocumentsOnEdit(long customerId, long[] documentsId)
         {
-            foreach (var doc in documentId)
-            {
-                await _documentService.DeleteDocuments(customerId, doc);
-            }
-            
+            await _documentService.DeleteDocuments(customerId, documentsId);
             return Ok();
         }
     }
