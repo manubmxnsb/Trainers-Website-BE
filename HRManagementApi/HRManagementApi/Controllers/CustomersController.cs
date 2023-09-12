@@ -43,9 +43,9 @@ namespace HRManagementApi.Controllers
 
         // DELETE api/<CustomerController>/5
         [HttpDelete]
-        public async Task< ActionResult > Delete([FromBody] long[] customerIds)
+        public async Task< ActionResult > Delete([FromBody] List<long> customerIds)
         {
-            await _customerService.DeleteCustomer(customerIds);
+            await _customerService.DeleteCustomers(customerIds);
             return  Ok();
         }
     }

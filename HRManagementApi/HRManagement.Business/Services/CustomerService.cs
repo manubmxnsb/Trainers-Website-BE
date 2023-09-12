@@ -11,9 +11,9 @@ namespace HRManagement.Business.Services
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
         }
 
-        public async Task DeleteCustomer(long[] customerIds)
+        public async Task DeleteCustomers(List<long> customerIds)
         {
-            if (customerIds != null && customerIds.Length > 0)
+            if (customerIds != null && customerIds.Count > 0)
             {
                 await _customerRepository.Delete(customerIds);
             }

@@ -2,6 +2,6 @@
 {
     public interface ICustomerRepository
     {
-        public Task Delete(long[] customerIds);
+        public Task Delete(List<long> customerIds);
     }
 }

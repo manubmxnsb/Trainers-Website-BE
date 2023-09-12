@@ -2,6 +2,6 @@
 {
     public interface ICustomerService
     {
-        public Task DeleteCustomer(long[] customerIds);
+        public Task DeleteCustomers(List<long> customerIds);
     }
 }
