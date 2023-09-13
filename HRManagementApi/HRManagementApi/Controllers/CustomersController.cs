@@ -7,7 +7,7 @@ namespace HRManagementApi.Controllers
 {
     
     [ApiController]
-    [Route("api/customers")]
+    [Route("api/[controller]")]
     public class CustomersController : ControllerBase
     {
 
@@ -19,9 +19,9 @@ namespace HRManagementApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetCustomer(long id, bool includeDocuments = false)
+        public async Task<ActionResult> GetCustomer(long id)
         {
-            var customer = await _customerService.GetCustomer(id, includeDocuments);
+            var customer = await _customerService.GetCustomer(id);
             return Ok(customer);
         }
     }

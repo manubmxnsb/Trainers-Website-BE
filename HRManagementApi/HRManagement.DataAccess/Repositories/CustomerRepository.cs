@@ -18,13 +18,8 @@ namespace HRManagement.DataAccess.Repositories
             return await _context.Customers.AnyAsync(customer => customer.Id == customerId);
         }
 
-        public async Task<Customer?> GetCustomerAsync(long customerId, bool includeDocuments)
+        public async Task<Customer?> GetCustomerAsync(long customerId)
         {
-            if (includeDocuments)
-            {
-                return await _context.Customers.Include(customer => customer.Documents)
-                    .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
-            }
             return await _context.Customers
                 .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
+using HRManagement.Business.Exceptions;
 using HRManagement.DataAccess.Repositories;
 
 namespace HRManagement.Business.Services
@@ -14,9 +15,9 @@ namespace HRManagement.Business.Services
             _mapper = mapper;
             _customerInfoRepository = dbRepository;
         }
-        public async Task<CustomerDto> GetCustomer(long id, bool includeDocuments = false)
+        public async Task<CustomerDto> GetCustomer(long id)
         {
-            var customer = await _customerInfoRepository.GetCustomerAsync(id, includeDocuments);
+            var customer = await _customerInfoRepository.GetCustomerAsync(id);
             if (customer == null)
             {
                 throw new NotFoundException();

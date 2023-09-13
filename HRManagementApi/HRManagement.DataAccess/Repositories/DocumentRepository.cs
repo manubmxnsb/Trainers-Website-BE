@@ -12,17 +12,5 @@ namespace HRManagement.DataAccess.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public async Task<IEnumerable<Document>> GetDocumentsForCustomerAsync(long customerId)
-        {
-            return await _context.Documents
-                .Where(p => p.CustomerId == customerId).ToListAsync();
-        }
-
-        public async Task<Document>? GetDocumentForCustomerAsync(long customerId, long documentId)
-        {
-            return await _context.Documents
-                .Where(p => p.CustomerId == customerId && p.Id == documentId)
-                .FirstOrDefaultAsync();
-        }
     }
 }
