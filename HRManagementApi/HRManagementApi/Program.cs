@@ -1,7 +1,7 @@
 using AutoMapper;
-using HRManagement.Business.IServices;
+using HRManagement.Business.Services;
 using HRManagement.DataAccess.DbContexts;
-using HRManagement.DataAccess.IRepositories;
+using HRManagement.DataAccess.Repositories;
 using HRManagementApi.Profiles;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,10 +17,10 @@ builder.Services.AddSwaggerGen(options =>
     options.CustomSchemaIds(type => type.ToString());
 });
 
-builder.Services.AddScoped<ICustomerRepository, HRManagement.DataAccess.Repositories.CustomerRepository>();
-builder.Services.AddScoped<IDocumentRepository, HRManagement.DataAccess.Repositories.DocumentRepository>();
-builder.Services.AddScoped<ICustomerService, HRManagement.Business.Services.CustomerService>();
-builder.Services.AddScoped<IDocumentService, HRManagement.Business.Services.DocumentService>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IDocumentService, DocumentService>();
 
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
     builder.Configuration["ConnectionStrings:HRManagementDB"]));

@@ -1,6 +1,6 @@
 ﻿using HRManagement.Business.Models;
 
-namespace HRManagement.Business.IServices
+namespace HRManagement.Business.Services
 {
     public interface ICustomerService
     {

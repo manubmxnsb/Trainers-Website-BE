@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using HRManagement.Business.IServices;
 using HRManagement.Business.Models;
+using HRManagement.Business.Services;
 using HRManagementApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
