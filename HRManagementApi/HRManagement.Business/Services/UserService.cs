@@ -28,10 +28,10 @@ namespace HRManagement.Business.Services
         {
             return await _userRepository.UserExistsAsync(userId);
         }
-        public async Task<UserWithEventsDto> GetUserWithEvents(long userID, bool includeEvents)
+        public async Task<UserDto> GetUserWithEvents(long userID, bool includeEvents)
         {
             var user = await _userRepository.GetUserWithEventsAsync(userID, includeEvents);
-            return _mapper.Map<UserWithEventsDto>(user);
+            return _mapper.Map<UserDto>(user);
 
         }
 

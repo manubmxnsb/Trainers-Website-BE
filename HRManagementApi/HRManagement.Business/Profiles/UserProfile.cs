@@ -8,8 +8,7 @@ namespace HRManagement.Business.Profiles
     {
         public UserProfile()
         {
-            CreateMap<UserWithEventsDto,User>().ReverseMap();
-            CreateMap<UserWithEventsDto, User>().ReverseMap();
+            CreateMap<User,UserDto>().ReverseMap();
             CreateMap<Event,EventsDto>().ReverseMap();
 
         }

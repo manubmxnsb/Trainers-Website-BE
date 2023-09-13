@@ -1,13 +1,8 @@
 ﻿using HRManagement.DataAccess.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRManagement.Business.Models
 {
-    public class UserWithEventsDto
+    public class UserDto
     {
         public long Id { get; set; }
         public required string FirstName { get; set; }
