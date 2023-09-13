@@ -6,35 +6,35 @@ namespace HRManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        // GET: api/<CustomerController>
+        // GET: api/<UserController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<CustomerController>/5
+        // GET api/<UserController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<CustomerController>
+        // POST api/<UserController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<CustomerController>/5
+        // PUT api/<UserController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<CustomerController>/5
+        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

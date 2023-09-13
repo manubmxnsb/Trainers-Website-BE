@@ -1,11 +1,5 @@
 ﻿using HRManagement.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRManagement.DataAccess.DbContexts
 {
@@ -13,12 +7,9 @@ namespace HRManagement.DataAccess.DbContexts
     {
         public DbSet<Customer> Customers { get; set; } = null!;
         public DbSet<Document> Documents { get; set; } = null!;
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(
-              "Data Source = (localdb)\\HRLocalDB; Initial Catalog = HRManagement"
-            );
-        }
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Event> Events { get; set; } = null!;
+
         public HRManagementDBContext(DbContextOptions<HRManagementDBContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -191,6 +182,7 @@ namespace HRManagement.DataAccess.DbContexts
                     IsActive = false,
                     DateCreated = new DateTime(2023, 09, 01),
                 });
+
             modelBuilder.Entity<Document>().HasData(
                 new Document()
                 {
@@ -225,6 +217,69 @@ namespace HRManagement.DataAccess.DbContexts
                     Content = new Byte[10],
                 }
             );
+
+            modelBuilder.Entity<User>().HasData(
+                new User()
+                {
+                    Id = 1,
+                    FirstName = "Jane",
+                    LastName = "Doe",
+                    Role = RoleType.Finance,
+                    Email = "jane.doe@red-to-blue.com",
+                    JobTitle = "Finance Manager",
+                    Department = "Finance",
+                    Picture = new Byte[10],
+                    PhoneNumber = "0123456789",
+                    DaysOff = 14,
+                },
+                new User()
+                {
+                    Id = 2,
+                    FirstName = "Ted",
+                    LastName = "Marshal",
+                    Role = RoleType.General,
+                    Email = "ted.marshal@red-to-blue.com",
+                    JobTitle = "Front-End Developer",
+                    Department = "Development",
+                    Picture = new Byte[10],
+                    PhoneNumber = "9876543210",
+                    DaysOff = 9,
+                },
+                new User()
+                {
+                    Id = 3,
+                    FirstName = "Sofia",
+                    LastName = "Atkinson",
+                    Role = RoleType.HR,
+                    Email = "sofia.atkinson@red-to-blue.com",
+                    JobTitle = "Human Resources",
+                    Department = "HR",
+                    Picture = new Byte[10],
+                    PhoneNumber = "0918273465",
+                    DaysOff = 6,
+                });
+
+            modelBuilder.Entity<Event>().HasData(
+                new Event()
+                {
+                    Id = 1,
+                    Title = "National day",
+                    Description = "Celebrating Romanian National Day.",
+                    Date = new DateTime(2023, 12, 01),
+                    Location = LocationType.Online,
+                    Type = EventType.General
+                },
+
+                new Event()
+                {
+                    Id = 2,
+                    Title = "Red to Blue 10th anniversary.",
+                    Description = "Celebrating 10 years of Red to Blue.",
+                    Date = new DateTime(2024, 08, 20),
+                    Location = LocationType.Online,
+                    Type = EventType.General
+                });
+
             base.OnModelCreating(modelBuilder);
         }
     }
