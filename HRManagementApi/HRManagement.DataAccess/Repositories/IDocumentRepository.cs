@@ -1,4 +1,4 @@
-﻿namespace HRManagement.DataAccess.IRepositories
+﻿namespace HRManagement.DataAccess.Repositories
 {
     public interface IDocumentRepository
     {

@@ -1,7 +1,7 @@
 using AutoMapper;
-using HRManagement.Business.IServices;
+using HRManagement.Business.Services;
 using HRManagement.DataAccess.DbContexts;
-using HRManagement.DataAccess.IRepositories;
+using HRManagement.DataAccess.Repositories;
 using HRManagementApi.Profiles;
 using Microsoft.EntityFrameworkCore;
 

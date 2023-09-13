@@ -1,4 +1,4 @@
-﻿using HRManagement.Business.IServices;
+﻿using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
@@ -15,7 +15,7 @@ namespace HRManagementApi.Controllers
         }
 
         [HttpDelete("/{customerId}/documentsDelete")]
-        public async Task<ActionResult> DeleteDocumentsOnEdit(long[] documentsId)
+        public async Task<ActionResult> DeleteDocumentsOnEdit(long documentsId)
         {
             await _documentService.DeleteDocuments(documentsId);
             return Ok();

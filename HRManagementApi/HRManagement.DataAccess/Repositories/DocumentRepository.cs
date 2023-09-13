@@ -1,5 +1,4 @@
 ﻿using HRManagement.DataAccess.DbContexts;
-using HRManagement.DataAccess.IRepositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRManagement.DataAccess.Repositories

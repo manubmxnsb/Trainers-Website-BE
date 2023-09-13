@@ -1,5 +1,4 @@
-﻿using HRManagement.Business.IServices;
-using HRManagement.DataAccess.IRepositories;
+﻿using HRManagement.DataAccess.Repositories;
 
 namespace HRManagement.Business.Services
 {
@@ -12,12 +11,9 @@ namespace HRManagement.Business.Services
             _documentRepository = documentRepository ?? throw new ArgumentNullException(nameof(documentRepository));
         }
 
-        public async Task DeleteDocuments(long[] documentsId)
+        public async Task DeleteDocuments(long documentsId)
         {
-            foreach (var doc in documentsId)
-            {
-                await _documentRepository.DeleteDocumentsAsync(doc);
-            }
+            await _documentRepository.DeleteDocumentsAsync(documentsId);
         }
     }
 }

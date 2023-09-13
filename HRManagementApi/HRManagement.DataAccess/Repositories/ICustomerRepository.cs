@@ -1,6 +1,6 @@
 ﻿using HRManagement.DataAccess.Entities;
 
-namespace HRManagement.DataAccess.IRepositories
+namespace HRManagement.DataAccess.Repositories
 {
     public interface ICustomerRepository
     {

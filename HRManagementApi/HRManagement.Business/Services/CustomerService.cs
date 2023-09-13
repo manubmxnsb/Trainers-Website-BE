@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using HRManagement.Business.IServices;
 using HRManagement.Business.Models;
 using HRManagement.DataAccess.Entities;
-using HRManagement.DataAccess.IRepositories;
+using HRManagement.DataAccess.Repositories;
 
 namespace HRManagement.Business.Services
 {
