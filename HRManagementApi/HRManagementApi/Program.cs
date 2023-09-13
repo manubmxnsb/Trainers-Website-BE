@@ -1,4 +1,6 @@
+using HRManagement.Business.Services;
 using HRManagement.DataAccess.DbContexts;
+using HRManagement.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,11 +11,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<HRManagement.DataAccess.Repositories.ICustomerRepository, HRManagement.DataAccess.Repositories.CustomerRepository>();
-builder.Services.AddScoped<HRManagement.Business.Services.ICustomerService, HRManagement.Business.Services.CustomerService>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
-    builder.Configuration["ConnectionStrings:HRManagementDBConnectionString"]));
+    builder.Configuration["ConnectionStrings:HRManagementDB"]));
 
 var app = builder.Build();
 
