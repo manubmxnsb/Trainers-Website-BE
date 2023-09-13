@@ -1,23 +1,35 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
+using HRManagement.Business.Exceptions;
 using HRManagement.DataAccess.Entities;
 using HRManagement.DataAccess.Repositories;
 
-namespace HRManagement.Business.Interface
+namespace HRManagement.Business.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ICustomerRepository _repository;
+        private readonly ICustomerRepository _customerInfoRepository;
         private readonly IMapper _mapper;
 
-        public CustomerService(ICustomerRepository repository, IMapper mapper)
+        public CustomerService(ICustomerRepository dbRepository, IMapper mapper)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _mapper = mapper;
+            _customerInfoRepository = dbRepository;
         }
+        public async Task<CustomerDto> GetCustomer(long id)
+        {
+            var customer = await _customerInfoRepository.GetCustomerAsync(id);
+            if (customer == null)
+            {
+                throw new NotFoundException();
+            }
+            return _mapper.Map<CustomerDto>(customer);
+        }
+        public async Task<bool> CustomerExists(long cityId)
 
         public async Task EditCustomer(CustomerDto customerToUpdate)
         {
+            return await _customerInfoRepository.CustomerExistsAsync(cityId);
             var customerEdit = _mapper.Map<Customer>(customerToUpdate);
             await _repository.EditCustomer(customerEdit);
         }

@@ -1,10 +1,4 @@
 ﻿using HRManagement.DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRManagement.DataAccess.Repositories
 {
@@ -12,5 +6,7 @@ namespace HRManagement.DataAccess.Repositories
     {
         public Task EditCustomer(Customer customer);
 
+        Task<Customer?> GetCustomerAsync(long customerId);
+        Task<bool> CustomerExistsAsync(long cityId);
     }
 }

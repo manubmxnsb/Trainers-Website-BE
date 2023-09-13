@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
+using HRManagement.Business.Models;
 using HRManagement.DataAccess.Entities;
 using HRManagement.Business.Models;
 
-namespace HRManagementBusiness.Profiles
+namespace HRManagement.DataAccess.Profiles
 {
     public class CustomerProfile : Profile
     {
 
-        public CustomerProfile()
+        public CustomerProfile() 
         {
             CreateMap<Customer, CustomerDto>().ReverseMap();
         }

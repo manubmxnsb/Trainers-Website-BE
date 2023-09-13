@@ -1,34 +1,33 @@
-﻿using AutoMapper;
-using Azure;
-using HRManagement.Business.Interface;
-using HRManagement.Business.Models;
-using HRManagement.DataAccess.Entities;
-using HRManagement.DataAccess.Repositories;
-using Microsoft.AspNetCore.JsonPatch;
+﻿using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HRManagementApi.Controllers
 {
-    [Route("api/customers")]
+    
     [ApiController]
+    [Route("api/[controller]")]
     public class CustomersController : ControllerBase
     {
-        private readonly ICustomerService _dbService;
 
-        public CustomersController(ICustomerService dbService, IMapper mapper)
+        private readonly ICustomerService _customerService;
+
+        public CustomersController(ICustomerService customerService)
         {
-            _dbService = dbService ?? throw new ArgumentNullException(nameof(dbService));
+            _customerService = customerService ?? throw new ArgumentNullException(nameof(customerService));
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetCustomer(long id)
 
         [HttpPut("customerEdit")]
 
         public async Task<ActionResult> EditCustomer(
             CustomerDto customerToUpdate)
         {
+            var customer = await _customerService.GetCustomer(id);
+            return Ok(customer);
            
             await _dbService.EditCustomer(customerToUpdate);
 
