@@ -28,8 +28,8 @@ builder.Services.AddAutoMapper(typeof(CustomerProfile), typeof(DocumentProfile))
 
 builder.Services.AddControllers(options =>
 {
-    options.ReturnHttpNotAcceptable = true; //Returns not acceptable for unsuported actions
-}).AddXmlDataContractSerializerFormatters();
+    options.ReturnHttpNotAcceptable = true;
+});
 
 var app = builder.Build();
 

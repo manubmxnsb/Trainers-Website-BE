@@ -4,7 +4,7 @@ namespace HRManagement.DataAccess.Repositories
 {
     public interface ICustomerRepository
     {
-        Task<Customer?> GetCustomerAsync(long customerId, bool includeDocuments);
+        Task<Customer?> GetCustomerAsync(long customerId);
         Task<bool> CustomerExistsAsync(long cityId);
     }
 }
