@@ -5,22 +5,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
 {
+    
+    [ApiController]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
+
         private readonly ICustomerService _customerService;
 
         public CustomersController(ICustomerService customerService)
         {
-            _customerService = customerService;
+            _customerService = customerService ?? throw new ArgumentNullException(nameof(customerService));
         }
-        // DELETE api/<CustomerController>/5
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetCustomer(long id)
+        {
+            var customer = await _customerService.GetCustomer(id);
+            return Ok(customer);
+        }
         [HttpDelete]
-        public async Task< ActionResult > Delete([FromBody] List<long> customerIds)
+        public async Task<ActionResult> Delete([FromBody] List<long> customerIds)
         {
             await _customerService.DeleteCustomers(customerIds);
-            return  Ok();
+            return Ok();
         }
     }
 }

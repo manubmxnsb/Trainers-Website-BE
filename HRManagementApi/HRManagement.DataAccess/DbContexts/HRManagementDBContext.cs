@@ -1,11 +1,5 @@
 ﻿using HRManagement.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRManagement.DataAccess.DbContexts
 {
@@ -15,6 +9,7 @@ namespace HRManagement.DataAccess.DbContexts
         public DbSet<Document> Documents { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Event> Events { get; set; } = null!;
+
         public HRManagementDBContext(DbContextOptions<HRManagementDBContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
