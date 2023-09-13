@@ -14,10 +14,10 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
-    builder.Configuration["ConnectionStrings:HRManagementAPI.db"]));
+    builder.Configuration["ConnectionStrings:LocalDB"]));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<HRManagement.DataAccess.Repositories.IDBRepository, HRManagement.DataAccess.Repositories.DBRepository>();
-builder.Services.AddScoped<HRManagement.Business.Services.IBusinessLayer, HRManagement.Business.Services.BusinessLayer>();
+builder.Services.AddScoped<HRManagement.DataAccess.Repositories.IUserRepository, HRManagement.DataAccess.Repositories.UserRepository>();
+builder.Services.AddScoped<HRManagement.Business.Services.IUserService, HRManagement.Business.Services.UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

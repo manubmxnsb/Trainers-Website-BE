@@ -1,0 +1,14 @@
+﻿using HRManagement.DataAccess.Entities;
+
+
+
+namespace HRManagement.DataAccess.Repositories
+{
+
+    public interface IUserRepository
+    {
+        Task<bool> UserExistsAsync(long userID);
+        Task<User?> GetUserWithEventsAsync(long userID, bool includeEvents);
+        Task<IEnumerable<Event>> GetEventsForCityAsync(long userID);
+    }
+}
