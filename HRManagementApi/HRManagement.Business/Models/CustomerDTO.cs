@@ -1,15 +1,8 @@
 ﻿using HRManagement.DataAccess.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRManagement.Business.Models
 {
-    public class CustomerDTO
+    public class CustomerDto
     {
         public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -22,6 +15,6 @@ namespace HRManagement.Business.Models
         public string? Details { get; set; }
         public bool IsActive { get; set; } = false;
         public DateTime? DateCreated { get; set; }
-        public ICollection<DocumentDTO> Documents { get; set; } = new List<DocumentDTO>();
+        public ICollection<DocumentDto> Documents { get; set; } = new List<DocumentDto>();
     }
 }

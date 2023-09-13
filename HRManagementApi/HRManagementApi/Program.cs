@@ -16,9 +16,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
-    builder.Configuration["ConnectionStrings:DBConnectionString"]));
+    builder.Configuration["ConnectionStrings:HRManagementDB"]));
 
-builder.Services.AddScoped<ICustomerInfoRepository, CustomerInfoRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IDocumentService, DocumentService>();
 

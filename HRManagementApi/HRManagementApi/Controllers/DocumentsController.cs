@@ -1,8 +1,6 @@
-﻿using AutoMapper;
+﻿
 using HRManagement.Business.Models;
 using HRManagement.Business.Services;
-using HRManagement.DataAccess.Repositories;
-using HRManagementApi.Middleware;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
@@ -20,14 +18,14 @@ namespace HRManagementApi.Controllers
             _customerService = customerService ?? throw new ArgumentNullException(nameof(customerService));
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DocumentDTO>>> GetDocuments(long customerId)
+        public async Task<ActionResult<IEnumerable<DocumentDto>>> GetDocuments(long customerId)
         {
 
             var documentsForCustomer = await _documentService.GetDocuments(customerId);
             return Ok(documentsForCustomer);
         }
         [HttpGet("{documentId}", Name = "GetDocument")]
-        public async Task<ActionResult<DocumentDTO>> GetDocument(long customerId, long documentId)
+        public async Task<ActionResult<DocumentDto>> GetDocument(long customerId, long documentId)
         {
             var document = await _documentService.GetDocument(customerId, documentId);
             return Ok(document);

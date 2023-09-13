@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HRManagement.DataAccess.Entities;
 
 namespace HRManagement.DataAccess.Profiles
 {
@@ -14,7 +8,7 @@ namespace HRManagement.DataAccess.Profiles
     {
         public CustomerProfile() 
         {
-            CreateMap<Entities.Customer, CustomerDTO>();
+            CreateMap<Customer, CustomerDto>();
         }
     }
 }

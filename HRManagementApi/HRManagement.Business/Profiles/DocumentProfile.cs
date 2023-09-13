@@ -1,5 +1,5 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
+using HRManagement.DataAccess.Entities;
 
 namespace HRManagement.Business.Profiles
 {
@@ -7,7 +7,7 @@ namespace HRManagement.Business.Profiles
     {
         public DocumentProfile() 
         {
-            CreateMap<DataAccess.Entities.Document, Models.DocumentDTO>();
+            CreateMap<Document, Models.DocumentDto>();
         }
         
     }
