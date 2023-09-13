@@ -15,13 +15,7 @@ namespace HRManagement.DataAccess.DbContexts
         public DbSet<Document> Documents { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Event> Events { get; set; } = null!;
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(
-              "Data Source = (localdb)\\First_DB;Initial Catalog = HRManagement; Integrated Security=SSPI;TrustServerCertificate=true;"
-            );
-        }
+
         public HRManagementDBContext(DbContextOptions<HRManagementDBContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

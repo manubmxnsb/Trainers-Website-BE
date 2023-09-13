@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿
 using HRManagement.Business.Models;
-using HRManagement.DataAccess.Repositories;
 
-namespace HRManagement.Business.Interface
+namespace HRManagement.Business.Services
 {
     public interface ICustomerService
     {
-        Task<CustomerDTO> GetCustomer(long id, bool includeDocuments);
+        Task<CustomerDTO> GetCustomer(long id, bool includeDocuments = false);
+        Task<bool> CustomerExists(long cityId);
     }
 }

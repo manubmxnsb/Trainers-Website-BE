@@ -14,7 +14,6 @@ namespace HRManagement.DataAccess.Profiles
     {
         public CustomerProfile() 
         {
-            CreateMap<Entities.Customer, CustomerWithoutDocumentsDTO>();
             CreateMap<Entities.Customer, CustomerDTO>();
         }
     }

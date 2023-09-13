@@ -5,7 +5,7 @@ using HRManagement.DataAccess.Entities;
 using HRManagement.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace HRManagement.Business.Interface
+namespace HRManagement.Business.Services
 {
     public class CustomerService : ICustomerService
     {
@@ -17,10 +17,18 @@ namespace HRManagement.Business.Interface
             _mapper = mapper;
             _customerInfoRepository = dbRepository;
         }
-        public async Task<CustomerDTO> GetCustomer(long id, bool includeDocuments)
+        public async Task<CustomerDTO> GetCustomer(long id, bool includeDocuments = false)
         {
             var customer = await _customerInfoRepository.GetCustomerAsync(id, includeDocuments);
-            return (_mapper.Map<CustomerDTO>(customer));
+            if (customer == null)
+            {
+                throw new NotFoundException();
+            }
+            return _mapper.Map<CustomerDTO>(customer);
+        }
+        public async Task<bool> CustomerExists(long cityId)
+        {
+            return await _customerInfoRepository.CustomerExistsAsync(cityId);
         }
     }
 }

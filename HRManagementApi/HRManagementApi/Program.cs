@@ -1,7 +1,9 @@
 using HRManagement.Business.Profiles;
+using HRManagement.Business.Services;
 using HRManagement.DataAccess.DbContexts;
 using HRManagement.DataAccess.Profiles;
 using HRManagement.DataAccess.Repositories;
+using HRManagementApi.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,9 @@ builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbConte
     builder.Configuration["ConnectionStrings:DBConnectionString"]));
 
 builder.Services.AddScoped<ICustomerInfoRepository, CustomerInfoRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IDocumentService, DocumentService>();
+
 
 builder.Services.AddAutoMapper(typeof(CustomerProfile), typeof(DocumentProfile));
 
@@ -33,8 +38,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseAuthorization();
+
+app.ConfigureExceptionMiddleware();
 
 app.UseHttpsRedirection();
 
