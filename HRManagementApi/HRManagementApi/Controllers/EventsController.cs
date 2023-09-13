@@ -5,7 +5,7 @@ namespace HRManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventController : ControllerBase
+    public class EventsController : ControllerBase
     {
     }
 }

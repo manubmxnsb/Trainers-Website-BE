@@ -11,6 +11,6 @@ namespace HRManagement.DataAccess.Repositories
     public interface ICustomerRepository
     {
         public Task EditCustomer(Customer customer);
-        
+
     }
 }

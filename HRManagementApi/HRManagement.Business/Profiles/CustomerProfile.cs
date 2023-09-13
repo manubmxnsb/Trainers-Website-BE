@@ -4,10 +4,11 @@ using HRManagement.Business.Models;
 
 namespace HRManagementBusiness.Profiles
 {
-    public class CustomerProfile: Profile
+    public class CustomerProfile : Profile
     {
 
-        public CustomerProfile() {
+        public CustomerProfile()
+        {
             CreateMap<Customer, CustomerDto>().ReverseMap();
         }
     }

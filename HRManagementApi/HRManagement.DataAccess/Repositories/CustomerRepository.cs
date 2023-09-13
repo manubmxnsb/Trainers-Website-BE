@@ -23,19 +23,6 @@ namespace HRManagement.DataAccess.Repositories
 
             Customer customer = await _context.Customers
                  .Where(customer => customer.Id == customerToUpdate.Id).FirstOrDefaultAsync();
-
-            customer.Id = customerToUpdate.Id;
-            customer.Name = customerToUpdate.Name;
-            customer.Email = customerToUpdate.Email;
-            customer.Address = customerToUpdate.Address;
-            customer.PhoneNumber = customerToUpdate.PhoneNumber;
-            customer.Country = customerToUpdate.Country;
-            customer.VAT = customerToUpdate.VAT;
-            customer.BillingType = customerToUpdate.BillingType;
-            customer.Details = customerToUpdate.Details;
-            customer.IsActive = customerToUpdate.IsActive;
-            customer.DateCreated = customerToUpdate.DateCreated;
-            customer.Documents = customer.Documents;
         
             _context.Customers.Update(customer);
             await _context.SaveChangesAsync();
