@@ -8,7 +8,6 @@ namespace HRManagementApi.Controllers
     
     [ApiController]
     [Route("api/[controller]")]
-    [ApiController]
     public class CustomersController : ControllerBase
     {
 

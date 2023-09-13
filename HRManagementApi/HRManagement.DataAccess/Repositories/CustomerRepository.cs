@@ -23,11 +23,6 @@ namespace HRManagement.DataAccess.Repositories
             return await _context.Customers
                 .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
         }
-        public async Task<Customer?> GetCustomerAsync(long customerId)
-        {
-            return await _context.Customers
-                .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
-        }
         public async Task Delete(List<long> customerIds)
         {
             var customers = await _context.Customers.Where(c => customerIds.Contains(c.Id)).ToListAsync();

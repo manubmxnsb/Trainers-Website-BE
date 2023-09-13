@@ -17,8 +17,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
+
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
-    builder.Configuration["ConnectionStrings:HRManagementDB"]));
+builder.Configuration["ConnectionStrings:HRManagementDB"]));
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();

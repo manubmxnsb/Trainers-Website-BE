@@ -7,15 +7,14 @@ namespace HRManagement.Business.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ICustomerRepository _customerInfoRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
 
         public CustomerService(ICustomerRepository dbRepository, IMapper mapper)
         {
             _mapper = mapper;
-            _customerInfoRepository = dbRepository;
+            _customerRepository = dbRepository;
         }
-        public async Task<CustomerDto> GetCustomer(long id)
 
         public async Task DeleteCustomers(List<long> customerIds)
         {
@@ -27,22 +26,19 @@ namespace HRManagement.Business.Services
             {
                 throw new InvalidOperationException("No customers were found!");
             }
-            public async Task<CustomerDto> GetCustomer(long id)
+        }
+        public async Task<CustomerDto> GetCustomer(long id)
+        {
+            var customer = await _customerRepository.GetCustomerAsync(id);
+            if (customer == null)
             {
-                var customer = await _customerInfoRepository.GetCustomerAsync(id);
-                if (customer == null)
-                {
-                    throw new NotFoundException();
-                }
-                return _mapper.Map<CustomerDto>(customer);
+                throw new NotFoundException();
+            }
+            return _mapper.Map<CustomerDto>(customer);
             }
             public async Task<bool> CustomerExists(long cityId)
             {
-                return await _customerInfoRepository.CustomerExistsAsync(cityId);
+                return await _customerRepository.CustomerExistsAsync(cityId);
             }
-
-)
-
         }
     }
-}
