@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using HRManagement.Business.Models;
 using HRManagement.Business.Services;
 using HRManagement.DataAccess.Repositories;
