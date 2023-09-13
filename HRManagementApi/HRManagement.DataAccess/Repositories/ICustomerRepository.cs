@@ -8,14 +8,9 @@ using System.Threading.Tasks;
 
 namespace HRManagement.DataAccess.Repositories
 {
-    public interface IDBRepository
+    public interface ICustomerRepository
     {
         public Task EditCustomer(Customer customer);
-        Task<Customer?> GetCustomerAsync(long customerId, bool includeDocuments);
-
-        public Task<bool> CustomerExistsAsync(long customerId);
-
-        public Task<bool> SaveChangesAsync();
         
     }
 }
