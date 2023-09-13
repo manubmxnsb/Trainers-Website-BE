@@ -6,7 +6,7 @@ namespace HRManagementApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         // GET: api/<UserController>
         [HttpGet]

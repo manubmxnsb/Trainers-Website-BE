@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HRManagement.Business\HRManagement.Business.csproj" />
-    <ProjectReference Include="..\HRManagement.DataAccess\HRManagement.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

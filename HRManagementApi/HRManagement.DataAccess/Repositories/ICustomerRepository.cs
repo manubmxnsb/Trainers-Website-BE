@@ -1,9 +1,8 @@
 ﻿using HRManagement.DataAccess.Entities;
-using HRManagement.DataAccess.Repositories;
 
 namespace HRManagement.DataAccess.Services
 {
-    public interface IDBRepository
+    public interface ICustomerRepository
     {
         Task<IEnumerable<Customer>> GetAllCustomersAsync(
             int pageNumber, int pageSize);
