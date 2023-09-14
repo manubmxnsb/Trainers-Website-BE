@@ -33,7 +33,7 @@ namespace HRManagement.DataAccess.Repositories
             }
             else
             {
-                throw new InvalidOperationException("No customers present in the list!");
+                throw new InvalidOperationException();
             }
 
 

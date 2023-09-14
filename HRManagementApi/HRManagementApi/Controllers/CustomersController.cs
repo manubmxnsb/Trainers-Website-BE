@@ -28,7 +28,7 @@ namespace HRManagementApi.Controllers
         public async Task<ActionResult> Delete([FromBody] List<long> customerIds)
         {
             await _customerService.DeleteCustomers(customerIds);
-            return Ok();
+            return NotFound();
         }
     }
 }

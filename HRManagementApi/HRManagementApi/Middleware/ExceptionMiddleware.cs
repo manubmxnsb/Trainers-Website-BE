@@ -45,6 +45,10 @@ namespace HRManagementApi.Middleware
                     statusCode = (int)HttpStatusCode.BadRequest;
                     message = "Bad Request. Try changing the value type.";
                     break;
+                case InvalidOperationException _:
+                    statusCode = (int)HttpStatusCode.NotFound;
+                    message = "Bad Request. Try changing the value type.";
+                    break;
             };
 
             await context.Response.WriteAsync(new ErrorDetails()

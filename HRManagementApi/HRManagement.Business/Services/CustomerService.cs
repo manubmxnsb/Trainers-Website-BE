@@ -24,7 +24,7 @@ namespace HRManagement.Business.Services
             }
             else
             {
-                throw new InvalidOperationException("No customers were found!");
+                throw new NotFoundException();
             }
         }
         public async Task<CustomerDto> GetCustomer(long id)
