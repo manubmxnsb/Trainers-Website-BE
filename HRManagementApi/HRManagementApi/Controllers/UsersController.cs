@@ -15,9 +15,9 @@ namespace HRManagementApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetUserWithEvents(long id, bool includeEvents )
+        public async Task<ActionResult> GetUser(long id )
         {
-            var user = await _business.GetUserWithEvents(id, includeEvents);
+            var user = await _business.GetUser(id);
             if (user == null)
         {
                 return NotFound();

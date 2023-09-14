@@ -10,4 +10,9 @@ namespace HRManagement.Business.Models
         public LocationType Location { get; set; }
         public EventType Type { get; set; }
     }
+    public enum EventType
+    {
+        General,
+        Personal
+    }
 }

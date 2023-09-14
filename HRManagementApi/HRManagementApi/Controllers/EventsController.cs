@@ -21,11 +21,12 @@ namespace HRManagementApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventsDto>>> GetEvents(long userId)
         {
-            var events = await _business.GetEvents(userId);  
             if (!await _business.UserExistsAsync(userId))
             {
                 return NotFound();
             }
+            var events = await _business.GetEvents(userId);  
+
             return Ok(events);
 
         }

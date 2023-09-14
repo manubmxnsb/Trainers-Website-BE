@@ -19,7 +19,7 @@ namespace HRManagement.Business.Services
 
         public async Task<IEnumerable<EventsDto>> GetEvents(long userId)
         {
-            var events = await _userRepository.GetEventsForCityAsync(userId);
+            var events = await _userRepository.GetEventsForUserAsync(userId);
             return _mapper.Map<IEnumerable<EventsDto>>(events);
 
         }
@@ -28,9 +28,10 @@ namespace HRManagement.Business.Services
         {
             return await _userRepository.UserExistsAsync(userId);
         }
-        public async Task<UserDto> GetUserWithEvents(long userID, bool includeEvents)
+
+        public async Task<UserDto> GetUser(long userID)
         {
-            var user = await _userRepository.GetUserWithEventsAsync(userID, includeEvents);
+            var user = await _userRepository.GetUserAsync(userID);
             return _mapper.Map<UserDto>(user);
 
         }

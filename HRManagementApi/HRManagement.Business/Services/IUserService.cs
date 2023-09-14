@@ -5,7 +5,7 @@ namespace HRManagement.Business.Services
 {
     public interface IUserService
     {
-        Task<UserDto> GetUserWithEvents(long userID, bool includeEvents);
+        Task<UserDto> GetUser(long userID);
         Task<IEnumerable<EventsDto>> GetEvents(long userId);
         Task<bool> UserExistsAsync(long userID);
     }
