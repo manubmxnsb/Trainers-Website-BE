@@ -11,7 +11,7 @@ namespace HRManagementApi.Controllers
     {
         private readonly IDocumentService _documentService;
 
-        public DocumentsController(IDocumentService documentService, ICustomerService customerService)
+        public DocumentsController(IDocumentService documentService)
         {
             _documentService = documentService ?? throw new ArgumentNullException(nameof(documentService));
         }

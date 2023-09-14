@@ -11,11 +11,13 @@ namespace HRManagement.Business.Services
         private readonly IMapper _mapper;
         private readonly ICustomerService _customerService;
 
-        public DocumentService(IDocumentRepository documentRepository, IMapper mapper, ICustomerService customerService)
+        public DocumentService(IDocumentRepository documentRepository, IMapper mapper)
         {
             _documentRepository = documentRepository ?? throw new ArgumentNullException(nameof(documentRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _customerService = customerService ?? throw new ArgumentNullException(nameof(customerService));
         }
+       
+       
     }
 }

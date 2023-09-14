@@ -21,7 +21,7 @@ namespace HRManagement.DataAccess.Repositories
         public async Task<Customer?> GetCustomerAsync(long customerId)
         {
                 return await _context.Customers.Include(customer => customer.Documents)
-                    .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
+                .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
         }
 
 
