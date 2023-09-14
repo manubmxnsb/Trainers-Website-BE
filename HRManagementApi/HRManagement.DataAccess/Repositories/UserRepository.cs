@@ -2,18 +2,17 @@
 using HRManagement.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace HRManagement.DataAccess.Repositories
 {
     public class UserRepository : IUserRepository
 
     {
         private readonly HRManagementDBContext _context;
+
         public UserRepository(HRManagementDBContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-
 
         public async Task<User?> GetUserAsync(long userId)
         { 
@@ -29,8 +28,5 @@ namespace HRManagement.DataAccess.Repositories
         {
             return await _context.Events.Where(e => e.UserId == userId).ToListAsync();
         }
-
-
-
     }
 }

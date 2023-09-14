@@ -11,8 +11,7 @@ namespace HRManagement.Business.Services
         private readonly IMapper _mapper;
 
         public UserService(IUserRepository userRepository, IMapper mapper)
-        {
-
+        { 
             _mapper = mapper;
             _userRepository = userRepository;
         }
@@ -21,7 +20,6 @@ namespace HRManagement.Business.Services
         {
             var events = await _userRepository.GetEventsForUserAsync(userId);
             return _mapper.Map<IEnumerable<EventsDto>>(events);
-
         }
 
         public async Task<bool> UserExistsAsync(long userId)
@@ -33,7 +31,6 @@ namespace HRManagement.Business.Services
         {
             var user = await _userRepository.GetUserAsync(userID);
             return _mapper.Map<UserDto>(user);
-
         }
 
     }

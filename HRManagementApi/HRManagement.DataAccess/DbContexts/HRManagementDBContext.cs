@@ -1,7 +1,6 @@
 ﻿using HRManagement.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace HRManagement.DataAccess.DbContexts
 {
     public class HRManagementDBContext : DbContext

@@ -9,6 +9,7 @@ namespace HRManagementApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _business;
+
         public UsersController(IUserService business)
         {
             _business = business ?? throw new ArgumentNullException(nameof(business));
@@ -18,13 +19,11 @@ namespace HRManagementApi.Controllers
         public async Task<ActionResult> GetUser(long id )
         {
             var user = await _business.GetUser(id);
-            if (user == null)
-        {
+            if(user == null)
+            {
                 return NotFound();
+            }
+            return Ok(user);
         }
-           return Ok(user);
-        }
-
-
     }
 }
