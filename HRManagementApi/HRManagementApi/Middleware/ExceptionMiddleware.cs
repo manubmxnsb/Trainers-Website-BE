@@ -39,10 +39,12 @@ namespace HRManagementApi.Middleware
             {
                 case NotFoundException _:
                     statusCode = (int)HttpStatusCode.NotFound;
+                    context.Response.StatusCode = statusCode;
                     message = "Item with specified id was not found.";
                     break;
                 case BadRequestException _:
                     statusCode = (int)HttpStatusCode.BadRequest;
+                    context.Response.StatusCode = statusCode;
                     message = "Bad Request. Try changing the value type.";
                     break;
             };
