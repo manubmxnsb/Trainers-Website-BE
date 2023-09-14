@@ -2,6 +2,7 @@
 using HRManagement.Business.Models;
 using HRManagement.DataAccess.Entities;
 using HRManagement.DataAccess.Repositories;
+using Microsoft.IdentityModel.Tokens;
 
 namespace HRManagement.Business.Services
 {
@@ -23,10 +24,15 @@ namespace HRManagement.Business.Services
                 await _documentRepository.DeleteDocumentsAsync(doc);
             }
         }
-        public async Task AddNewDocumentFromEdit(long customerId, DocumentDto document)
+
+        public async Task AddDocuments(long customerId, List<DocumentDto> document)
         {
-            var mappedDocument = _mapper.Map<Document>(document);
-            await _documentRepository.AddNewDocumentFromEditAsync(customerId, mappedDocument);
+            var mappedDocuments = _mapper.Map<List<Document>>(document);
+            if (mappedDocuments.IsNullOrEmpty()) 
+            {
+                throw new ArgumentException("No documents mapped!");
+            } 
+            await _documentRepository.AddDocuments(customerId, mappedDocuments);
         }
     }
 }

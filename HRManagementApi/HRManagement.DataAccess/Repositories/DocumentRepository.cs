@@ -27,26 +27,22 @@ namespace HRManagement.DataAccess.Repositories
             }
         }
 
-        public async Task AddNewDocumentFromEditAsync(long customerId, Document newDocument)
+        public async Task AddDocuments(long customerId, List<Document> newDocuments)
         {
-            if (newDocument != null)
+            var customer = await _context.Customers.Where(c => c.Id == customerId).FirstOrDefaultAsync();
+            if (customer != null)
             {
-                var customer = await _context.Customers.Where(c => c.Id == customerId).FirstAsync();
-                if (customer != null)
+                foreach (var document in newDocuments)
                 {
-                    newDocument.CustomerId = customerId;
-                    var documentToBeAdded = await _context.Documents.AddAsync(newDocument);
-                    await _context.SaveChangesAsync();
+                    document.CustomerId = customerId;
+                }
+                await _context.Documents.AddRangeAsync(newDocuments);
+                await _context.SaveChangesAsync();
 
-                }
-                else
-                {
-                    throw new InvalidOperationException("No customer was found");
-                }
             }
             else
             {
-                throw new InvalidOperationException("No document was found");
+                throw new InvalidOperationException("No customer was found");
             }
         }
     }

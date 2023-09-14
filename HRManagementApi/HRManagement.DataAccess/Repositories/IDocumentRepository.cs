@@ -6,7 +6,7 @@ namespace HRManagement.DataAccess.Repositories
     {
         Task DeleteDocumentsAsync(long documentId);
 
-        Task AddNewDocumentFromEditAsync(long customerId, Document mappedDocument);
+        Task AddDocuments(long customerId, List<Document> mappedDocument);
 
     }
 }

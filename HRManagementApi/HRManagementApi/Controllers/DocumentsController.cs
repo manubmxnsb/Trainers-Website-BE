@@ -3,6 +3,7 @@ using HRManagement.Business.Models;
 using HRManagement.Business.Services;
 using HRManagementApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace HRManagementApi.Controllers
 {
@@ -26,14 +27,14 @@ namespace HRManagementApi.Controllers
             return Ok();
         }
         [HttpPost("/{customerId}/documentAdd")]
-        public async Task<ActionResult> AddDocumentFromEdit(long customerId, DocumentModel document)
+        public async Task<ActionResult> AddDocumentFromEdit(long customerId, List<DocumentModel> document)
         {
-            var mappedDocumentApi = _mapper.Map<DocumentDto>(document);
-            if (mappedDocumentApi == null)
+            var mappedDocuments = _mapper.Map<List<DocumentDto>>(document);
+            if (mappedDocuments.IsNullOrEmpty())
             {
                 return NotFound();
             }
-            await _documentService.AddNewDocumentFromEdit(customerId, mappedDocumentApi);
+            await _documentService.AddDocuments(customerId, mappedDocuments);
             return Ok();
         }
     }

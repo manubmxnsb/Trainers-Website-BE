@@ -5,6 +5,6 @@ namespace HRManagement.Business.Services
     public interface IDocumentService
     {
         Task DeleteDocuments(long[] documentsId);
-        Task AddNewDocumentFromEdit(long customerId, DocumentDto document);
+        Task AddDocuments(long customerId, List<DocumentDto> documents);
     }
 }
