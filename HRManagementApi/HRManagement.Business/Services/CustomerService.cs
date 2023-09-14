@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
-using HRManagement.Business.Exceptions;
+using HRManagement.DataAccess.Exceptions;
 using HRManagement.DataAccess.Repositories;
 
 namespace HRManagement.Business.Services

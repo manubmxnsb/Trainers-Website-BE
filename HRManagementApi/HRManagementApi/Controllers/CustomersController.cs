@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
 {
-    
+    /// <response code="200">Success</response>
+    /// <response code="404">Not Found</response>
+    /// <response code="400">Bad Request</response>
     [ApiController]
     [Route("api/[controller]")]
     public class CustomersController : ControllerBase
