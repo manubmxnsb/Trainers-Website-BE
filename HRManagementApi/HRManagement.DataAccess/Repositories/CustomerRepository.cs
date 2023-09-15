@@ -2,7 +2,7 @@
 using HRManagement.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HRManagement.DataAccess.Services
+namespace HRManagement.DataAccess.Repositories
 {
     public class CustomerRepository: ICustomerRepository
     {
@@ -13,14 +13,26 @@ namespace HRManagement.DataAccess.Services
             _context = context ?? 
                 throw new ArgumentNullException(nameof(context));
         }
+
+        public async Task<bool> CustomerExistsAsync(long customerId)
+        {
+            return await _context.Customers.AnyAsync(customer => customer.Id == customerId);
+        }
+
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync(int pageNumber, int pageSize)
         {
-            
-            var allCustomers = _context.Customers;
-            var allCostomersToReturn = await allCustomers.Skip(pageSize*(pageNumber-1))
+            var allCustomers = await _context.Customers.Skip(pageSize * (pageNumber - 1))
                 .Take(pageSize)
                 .ToListAsync();
-            return allCostomersToReturn;
+            return allCustomers;
         }
+        public async Task<Customer?> GetCustomerAsync(long customerId)
+        {
+            return await _context.Customers
+                .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
+        }
+
+
+
     }
 }

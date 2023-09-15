@@ -1,29 +1,31 @@
-﻿using AutoMapper;
-using HRManagement.Business.Interface;
-using HRManagement.Business.Models;
+﻿using HRManagement.Business.Models;
+using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
 {
-    [Route("api")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CustomersController : ControllerBase
     {
+
         private readonly ICustomerService _customerService;
 
-
-        public CustomersController(ICustomerService customerService,
-            IMapper mapper)
+        public CustomersController(ICustomerService customerService)
         {
-            _customerService = customerService ?? 
-                throw new ArgumentNullException(nameof(customerService));
+            _customerService = customerService ?? throw new ArgumentNullException(nameof(customerService));
         }
 
-        [HttpGet("/GetAllCustomers")]
-        [HttpGet]
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetCustomer(long id)
+        {
+            var customer = await _customerService.GetCustomer(id);
+            return Ok(customer);
+        }
+        [HttpGet("/Customers")]
         public async Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(int pageNumber, int pageSize)
         {
-            var allCustomers = await _customerService.GetAllCustomers(pageNumber,pageSize) ;
+            var allCustomers = await _customerService.GetAllCustomers(pageNumber,pageSize);
             return allCustomers;
         }
 

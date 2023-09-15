@@ -1,9 +1,12 @@
-﻿using HRManagement.Business.Models;
+﻿
+using HRManagement.Business.Models;
 
-namespace HRManagement.Business.Interface
+namespace HRManagement.Business.Services
 {
     public interface ICustomerService
     {
-       Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(int pageNumber, int pageSize);
+        Task<CustomerDto> GetCustomer(long id);
+        Task<bool> CustomerExists(long cityId);
+        Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(int pageNumber, int pageSize);
     }
 }
