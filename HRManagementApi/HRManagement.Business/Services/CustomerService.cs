@@ -19,10 +19,6 @@ namespace HRManagement.Business.Services
         public async Task<CustomerDto> GetCustomer(long id)
         {
             var customer = await _customerInfoRepository.GetCustomerAsync(id);
-            if (customer == null)
-            {
-                throw new NotFoundException();
-            }
             return _mapper.Map<CustomerDto>(customer);
         }
 

@@ -1,5 +1,6 @@
 ﻿using HRManagement.DataAccess.DbContexts;
 using HRManagement.DataAccess.Entities;
+using HRManagement.DataAccess.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRManagement.DataAccess.Repositories
@@ -20,8 +21,9 @@ namespace HRManagement.DataAccess.Repositories
 
         public async Task<Customer?> GetCustomerAsync(long customerId)
         {
-            return await _context.Customers.Include(customer => customer.Documents)
+            var customer = await _context.Customers.Include(customer => customer.Documents)
                 .FirstOrDefaultAsync(customer => customer.Id == customerId);
+            return customer == null ? throw new NotFoundException() : customer;
         }
     }
 }
