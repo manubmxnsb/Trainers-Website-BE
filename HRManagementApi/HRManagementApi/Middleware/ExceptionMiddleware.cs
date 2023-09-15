@@ -34,16 +34,16 @@ namespace HRManagementApi.Middleware
             switch(ex)
             {
                 case NotFoundException _:
-                    statusCode = ErrorDictionary.ErrorCode[HttpStatusCode.NotFound];
+                    statusCode = (int)HttpStatusCode.NotFound;
                     message = "Item with specified id was not found.";
                     break;
                 case BadRequestException _:
-                    statusCode = ErrorDictionary.ErrorCode[HttpStatusCode.BadRequest];
-                    message = "Bad Request. Try changing the value type.";
+                    statusCode = (int)HttpStatusCode.BadRequest;
+                    message = "Bad Request.";
                     break;
                 default:
-                    statusCode = ErrorDictionary.ErrorCode[HttpStatusCode.InternalServerError];
-                    message = Environment.StackTrace.ToString();
+                    statusCode = (int)HttpStatusCode.InternalServerError;
+                    message = ex.Message;
                     break;
             };
             httpContext.Response.StatusCode = statusCode;
