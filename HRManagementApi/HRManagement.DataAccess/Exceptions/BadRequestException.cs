@@ -1,5 +1,4 @@
-﻿
-namespace HRManagement.DataAccess.Exceptions
+﻿namespace HRManagement.DataAccess.Exceptions
 {
     public class BadRequestException : Exception
     {

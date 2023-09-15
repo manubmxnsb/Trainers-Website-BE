@@ -23,8 +23,5 @@ namespace HRManagement.DataAccess.Repositories
             return await _context.Customers.Include(customer => customer.Documents)
                 .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
         }
-
-
-
     }
 }

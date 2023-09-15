@@ -1,5 +1,4 @@
-﻿
-using HRManagement.DataAccess.Exceptions;
+﻿using HRManagement.DataAccess.Exceptions;
 using HRManagement.Business.Models;
 using System.Net;
 
@@ -48,6 +47,7 @@ namespace HRManagementApi.Middleware
                     break;
             };
             httpContext.Response.StatusCode = statusCode;
+
             await httpContext.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = statusCode,

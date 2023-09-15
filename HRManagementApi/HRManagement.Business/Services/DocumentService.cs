@@ -15,7 +15,5 @@ namespace HRManagement.Business.Services
             _documentRepository = documentRepository ?? throw new ArgumentNullException(nameof(documentRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-       
-       
     }
 }
