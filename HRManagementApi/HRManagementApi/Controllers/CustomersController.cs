@@ -2,11 +2,8 @@
 using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace HRManagementApi.Controllers
 {
-    
     [ApiController]
     [Route("api/[controller]")]
     public class CustomersController : ControllerBase
