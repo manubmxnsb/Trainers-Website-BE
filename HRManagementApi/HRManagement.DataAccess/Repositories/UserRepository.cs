@@ -16,7 +16,7 @@ namespace HRManagement.DataAccess.Repositories
 
         public async Task<User?> GetUserAsync(long userId)
         { 
-                return await _context.Users.Include(u => u.Events).Where(u => u.Id == userId).FirstOrDefaultAsync();       
+            return await _context.Users.Include(u => u.Events).Where(u => u.Id == userId).FirstOrDefaultAsync();       
         }
 
         public async Task<bool> UserExistsAsync(long userId)
