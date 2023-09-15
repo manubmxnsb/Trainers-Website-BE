@@ -25,7 +25,7 @@ namespace HRManagementApi.Controllers
         [HttpGet("/all-customers")]
         public async Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(int pageNumber, int pageSize)
         {
-            var allCustomers = await _customerService.GetAllCustomers(pageNumber,pageSize);
+            var allCustomers = await _customerService.GetAllCustomers(pageNumber, pageSize);
             return allCustomers;
         }
     }
