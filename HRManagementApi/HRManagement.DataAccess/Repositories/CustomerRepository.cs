@@ -25,7 +25,7 @@ namespace HRManagement.DataAccess.Repositories
             var allCustomers = await _context.Customers.Skip(pageSize * (pageNumber - 1))
                 .Take(pageSize)
                 .ToListAsync();
-            return allCustomers;
+            return allCustomers.Any() ? allCustomers : throw new NotFoundException();   
         }
 
         public async Task<Customer?> GetCustomerAsync(long customerId)
