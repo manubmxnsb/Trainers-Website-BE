@@ -1,6 +1,4 @@
-﻿
-using HRManagement.Business.Models;
-using HRManagement.Business.Services;
+﻿using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers

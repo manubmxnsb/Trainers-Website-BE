@@ -1,5 +1,4 @@
-﻿
-using HRManagement.Business.Exceptions;
+﻿using HRManagement.Business.Exceptions;
 using HRManagement.Business.Models;
 using System.Net;
 

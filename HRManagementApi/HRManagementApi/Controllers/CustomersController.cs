@@ -1,4 +1,5 @@
-﻿using HRManagement.Business.Services;
+﻿using HRManagement.Business.Models;
+using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,21 +21,17 @@ namespace HRManagementApi.Controllers
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetCustomer(long id)
-
-        [HttpPut("customerEdit")]
-
-        public async Task<ActionResult> EditCustomer(
-            CustomerDto customerToUpdate)
         {
             var customer = await _customerService.GetCustomer(id);
             return Ok(customer);
-           
-            await _dbService.EditCustomer(customerToUpdate);
+        }
 
+        [HttpPut("customerEdit")]
+        public async Task<ActionResult> EditCustomer(
+            CustomerDto customerToUpdate)
+        {
+            await _customerService.EditCustomer(customerToUpdate);
             return NoContent();
-
-
         }
     }
-  
 }

@@ -1,6 +1,4 @@
-﻿
-
-namespace HRManagement.Business.Models
+﻿namespace HRManagement.Business.Models
 {
     public class DocumentDto
     {

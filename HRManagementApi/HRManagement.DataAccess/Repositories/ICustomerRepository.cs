@@ -7,6 +7,7 @@ namespace HRManagement.DataAccess.Repositories
         public Task EditCustomer(Customer customer);
 
         Task<Customer?> GetCustomerAsync(long customerId);
+
         Task<bool> CustomerExistsAsync(long cityId);
     }
 }

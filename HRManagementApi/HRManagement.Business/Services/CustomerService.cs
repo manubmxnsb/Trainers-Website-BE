@@ -26,12 +26,14 @@ namespace HRManagement.Business.Services
             return _mapper.Map<CustomerDto>(customer);
         }
         public async Task<bool> CustomerExists(long cityId)
+        {
+            return await _customerInfoRepository.CustomerExistsAsync(cityId);
+        }
 
         public async Task EditCustomer(CustomerDto customerToUpdate)
         {
-            return await _customerInfoRepository.CustomerExistsAsync(cityId);
             var customerEdit = _mapper.Map<Customer>(customerToUpdate);
-            await _repository.EditCustomer(customerEdit);
+            await _customerInfoRepository.EditCustomer(customerEdit);
         }
     }
 }
