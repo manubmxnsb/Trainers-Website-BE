@@ -1,5 +1,4 @@
-﻿
-using HRManagement.Business.Models;
+﻿using HRManagement.Business.Models;
 
 namespace HRManagement.Business.Services
 {

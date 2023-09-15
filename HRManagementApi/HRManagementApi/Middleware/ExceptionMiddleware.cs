@@ -1,5 +1,4 @@
-﻿
-using HRManagement.Business.Exceptions;
+﻿using HRManagement.Business.Exceptions;
 using HRManagement.Business.Models;
 using System.Net;
 
@@ -9,12 +8,14 @@ namespace HRManagementApi.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
+
         //Constructor & Dependency Injection
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             _logger = logger;
             _next = next;
         }
+
         // Proccedes with task if successfull or fires custom exception if failure
         public async Task InvokeAsync(HttpContext httpContext)
         {
@@ -34,6 +35,7 @@ namespace HRManagementApi.Middleware
             context.Response.ContentType = "application/json";
             int statusCode = context.Response.StatusCode;
             string message = ex.Message;
+
             //Custom Error Messages based on the exception type
             switch(ex)
             {

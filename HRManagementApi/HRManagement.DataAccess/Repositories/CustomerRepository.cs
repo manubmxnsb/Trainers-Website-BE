@@ -26,13 +26,11 @@ namespace HRManagement.DataAccess.Repositories
                 .ToListAsync();
             return allCustomers;
         }
+
         public async Task<Customer?> GetCustomerAsync(long customerId)
         {
             return await _context.Customers
                 .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
         }
-
-
-
     }
 }

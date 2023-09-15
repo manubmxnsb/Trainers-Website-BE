@@ -8,7 +8,6 @@ namespace HRManagementApi.Controllers
     [Route("api/[controller]")]
     public class CustomersController : ControllerBase
     {
-
         private readonly ICustomerService _customerService;
 
         public CustomersController(ICustomerService customerService)
@@ -22,12 +21,12 @@ namespace HRManagementApi.Controllers
             var customer = await _customerService.GetCustomer(id);
             return Ok(customer);
         }
-        [HttpGet("/Customers")]
+
+        [HttpGet("/all-customers")]
         public async Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(int pageNumber, int pageSize)
         {
             var allCustomers = await _customerService.GetAllCustomers(pageNumber,pageSize);
             return allCustomers;
         }
-
     }
 }

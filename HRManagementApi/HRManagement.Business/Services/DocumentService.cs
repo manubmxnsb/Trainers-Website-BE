@@ -10,10 +10,10 @@ namespace HRManagement.Business.Services
 
         public DocumentService(IDocumentRepository documentRepository, IMapper mapper)
         {
-            _documentRepository = documentRepository ?? throw new ArgumentNullException(nameof(documentRepository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _documentRepository = documentRepository ?? 
+                throw new ArgumentNullException(nameof(documentRepository));
+            _mapper = mapper ?? 
+                throw new ArgumentNullException(nameof(mapper));
         }
-       
-       
     }
 }
