@@ -1,5 +1,4 @@
-﻿
-using HRManagement.Business.Exceptions;
+﻿using HRManagement.Business.Exceptions;
 using HRManagement.Business.Models;
 using System.Net;
 
@@ -43,10 +42,6 @@ namespace HRManagementApi.Middleware
                     break;
                 case BadRequestException _:
                     statusCode = (int)HttpStatusCode.BadRequest;
-                    message = "Bad Request. Try changing the value type.";
-                    break;
-                case InvalidOperationException _:
-                    statusCode = (int)HttpStatusCode.NotFound;
                     message = "Bad Request. Try changing the value type.";
                     break;
             };

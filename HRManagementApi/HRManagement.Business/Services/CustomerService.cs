@@ -16,17 +16,6 @@ namespace HRManagement.Business.Services
             _customerRepository = dbRepository;
         }
 
-        public async Task DeleteCustomers(List<long> customerIds)
-        {
-            if (customerIds != null && customerIds.Count > 0)
-            {
-                await _customerRepository.Delete(customerIds);
-            }
-            else
-            {
-                throw new NotFoundException();
-            }
-        }
         public async Task<CustomerDto> GetCustomer(long id)
         {
             var customer = await _customerRepository.GetCustomerAsync(id);
@@ -35,10 +24,23 @@ namespace HRManagement.Business.Services
                 throw new NotFoundException();
             }
             return _mapper.Map<CustomerDto>(customer);
-            }
-            public async Task<bool> CustomerExists(long cityId)
+        }
+
+        public async Task<bool> CustomerExists(long cityId)
+        {
+            return await _customerRepository.CustomerExistsAsync(cityId);
+        }
+
+        public async Task DeleteCustomers(List<long> customerIds)
+        {
+            if (customerIds != null && customerIds.Count > 0)
             {
-                return await _customerRepository.CustomerExistsAsync(cityId);
+                await _customerRepository.DeleteCustomers(customerIds);
+            }
+            else
+            {
+                throw new NotFoundException();
             }
         }
     }
+}

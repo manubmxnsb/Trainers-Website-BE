@@ -6,6 +6,6 @@ namespace HRManagement.DataAccess.Repositories
     {
         Task<Customer?> GetCustomerAsync(long customerId);
         Task<bool> CustomerExistsAsync(long cityId);
-        public Task Delete(List<long> customerIds);
+        Task DeleteCustomers(List<long> customerIds);
     }
 }

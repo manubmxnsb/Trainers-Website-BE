@@ -23,7 +23,8 @@ namespace HRManagement.DataAccess.Repositories
             return await _context.Customers
                 .Where(customer => customer.Id == customerId).FirstOrDefaultAsync();
         }
-        public async Task Delete(List<long> customerIds)
+
+        public async Task DeleteCustomers(List<long> customerIds)
         {
             var customers = await _context.Customers.Where(c => customerIds.Contains(c.Id)).ToListAsync();
             if (customers.Any())
@@ -35,8 +36,6 @@ namespace HRManagement.DataAccess.Repositories
             {
                 throw new InvalidOperationException();
             }
-
-
         }
-}
+    }
 }
