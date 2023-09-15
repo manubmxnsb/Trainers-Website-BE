@@ -20,7 +20,7 @@ namespace HRManagement.Business.Services
             var customer = await _customerInfoRepository.GetCustomerAsync(id);
             if (customer == null)
             {
-                throw new NotFoundException();
+                throw new Exception();
             }
             return _mapper.Map<CustomerDto>(customer);
         }

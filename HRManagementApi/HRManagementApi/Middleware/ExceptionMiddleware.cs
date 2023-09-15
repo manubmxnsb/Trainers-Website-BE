@@ -42,6 +42,10 @@ namespace HRManagementApi.Middleware
                     statusCode = ErrorDictionary.ErrorCode[HttpStatusCode.BadRequest];
                     message = "Bad Request. Try changing the value type.";
                     break;
+                default:
+                    statusCode = ErrorDictionary.ErrorCode[HttpStatusCode.InternalServerError];
+                    message = Environment.StackTrace.ToString();
+                    break;
             };
             httpContext.Response.StatusCode = statusCode;
             await httpContext.Response.WriteAsync(new ErrorDetails()
