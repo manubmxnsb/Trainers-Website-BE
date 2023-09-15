@@ -1,14 +1,15 @@
 ﻿using HRManagement.DataAccess.Entities;
+using HRManagement.DataAccess.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRManagement.DataAccess.DbContexts
 {
     public class HRManagementDBContext : DbContext
     {
-        public DbSet<Customer> Customers { get; set; } = null!;
-        public DbSet<Document> Documents { get; set; } = null!;
-        public DbSet<User> Users { get; set; } = null!;
-        public DbSet<Event> Events { get; set; } = null!;
+        public DbSet<Customer> Customers { get; set; } 
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<User> Users { get; set; } 
+        public DbSet<Event> Events { get; set; }
 
         public HRManagementDBContext(DbContextOptions<HRManagementDBContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

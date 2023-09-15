@@ -2,7 +2,7 @@
 using HRManagement.Business.Models;
 using HRManagement.DataAccess.Entities;
 
-namespace HRManagement.DataAccess.Profiles
+namespace HRManagement.Business.Profiles
 {
     public class CustomerProfile : Profile
     {

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using HRManagement.DataAccess.Enums;
 
 namespace HRManagement.DataAccess.Entities
 {
@@ -19,7 +20,6 @@ namespace HRManagement.DataAccess.Entities
 
         public string Country { get; set; }
 
-
         [Column(TypeName = "decimal(18,4)")]
         public decimal VAT { get; set; }
 
@@ -32,12 +32,5 @@ namespace HRManagement.DataAccess.Entities
         public DateTime DateCreated { get; set; }
 
         public ICollection<Document> Documents { get; set; } = new List<Document>();
-    }
-    public enum BillingType
-    {
-        Daily,
-        Weekly,
-        Monthly,
-        Yearly
     }
 }

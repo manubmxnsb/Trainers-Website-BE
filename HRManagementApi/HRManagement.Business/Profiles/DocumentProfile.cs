@@ -5,10 +5,10 @@ namespace HRManagement.Business.Profiles
 {
     public class DocumentProfile : Profile
     {
-        public DocumentProfile() 
+        public DocumentProfile()
         {
             CreateMap<Document, Models.DocumentDto>();
         }
-        
+
     }
 }

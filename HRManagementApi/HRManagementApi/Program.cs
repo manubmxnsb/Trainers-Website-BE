@@ -1,7 +1,6 @@
 using HRManagement.Business.Profiles;
 using HRManagement.Business.Services;
 using HRManagement.DataAccess.DbContexts;
-using HRManagement.DataAccess.Profiles;
 using HRManagement.DataAccess.Repositories;
 using HRManagementApi.Middleware;
 using Microsoft.EntityFrameworkCore;

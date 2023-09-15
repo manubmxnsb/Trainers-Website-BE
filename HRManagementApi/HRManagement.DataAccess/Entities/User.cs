@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using HRManagement.DataAccess.Enums;
 
 namespace HRManagement.DataAccess.Entities
 {
@@ -28,11 +29,5 @@ namespace HRManagement.DataAccess.Entities
         public ICollection<Event> Events { get; set; } = new List<Event>();
 
         public int DaysOff { get; set; }
-    }
-    public enum RoleType
-    {
-        General,
-        HR,
-        Finance
     }
 }
