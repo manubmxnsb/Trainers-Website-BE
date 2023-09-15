@@ -18,7 +18,7 @@ namespace HRManagement.DataAccess.Repositories
         {
             if (!await _context.Customers.AnyAsync(c => c.Id == customerToUpdate.Id))
             {
-                throw new Exception("customer doesn't exist");
+                throw new NotFoundException();
             }
 
             _context.Customers.Update(customerToUpdate);

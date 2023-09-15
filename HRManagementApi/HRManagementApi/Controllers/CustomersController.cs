@@ -1,5 +1,6 @@
 ﻿using HRManagement.Business.Models;
 using HRManagement.Business.Services;
+using HRManagement.DataAccess.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
@@ -29,7 +30,7 @@ namespace HRManagementApi.Controllers
         {
             if(!await _customerService.CustomerExists(customerToUpdate.Id))
             {
-                throw new Exception("customer doesn't exist");
+                throw new NotFoundException();
             }
             await _customerService.EditCustomer(customerToUpdate);
             return NoContent();
