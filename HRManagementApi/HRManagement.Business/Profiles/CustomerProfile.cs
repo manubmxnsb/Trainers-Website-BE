@@ -8,6 +8,7 @@ namespace HRManagement.DataAccess.Profiles
     {
         public CustomerProfile() 
         {
+            CreateMap<CustomerDto, Customer>();
             CreateMap<Customer, CustomerDto>();
         }
     }

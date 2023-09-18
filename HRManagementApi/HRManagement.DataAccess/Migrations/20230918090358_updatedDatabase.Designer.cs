@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagement.DataAccess.Migrations
 {
     [DbContext(typeof(HRManagementDBContext))]
-    [Migration("20230918080319_updatedMigration")]
-    partial class updatedMigration
+    [Migration("20230918090358_updatedDatabase")]
+    partial class updatedDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -253,15 +253,12 @@ namespace HRManagement.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("CustomerId1")
+                    b.Property<long>("CustomerId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId1");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Documents");
 
@@ -269,22 +266,22 @@ namespace HRManagement.DataAccess.Migrations
                         new
                         {
                             Id = 1L,
-                            CustomerId = 1
+                            CustomerId = 1L
                         },
                         new
                         {
                             Id = 2L,
-                            CustomerId = 1
+                            CustomerId = 1L
                         },
                         new
                         {
                             Id = 3L,
-                            CustomerId = 2
+                            CustomerId = 2L
                         },
                         new
                         {
                             Id = 4L,
-                            CustomerId = 2
+                            CustomerId = 2L
                         });
                 });
 
@@ -435,7 +432,9 @@ namespace HRManagement.DataAccess.Migrations
                 {
                     b.HasOne("HRManagement.DataAccess.Entities.Customer", null)
                         .WithMany("Documents")
-                        .HasForeignKey("CustomerId1");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HRManagement.DataAccess.Entities.Event", b =>

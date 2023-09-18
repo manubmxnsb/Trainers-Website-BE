@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRManagement.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class updatedMigration : Migration
+    public partial class updatedDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,17 +62,17 @@ namespace HRManagement.DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId1 = table.Column<long>(type: "bigint", nullable: true)
+                    CustomerId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Documents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Documents_Customers_CustomerId1",
-                        column: x => x.CustomerId1,
+                        name: "FK_Documents_Customers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,17 +118,6 @@ namespace HRManagement.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Documents",
-                columns: new[] { "Id", "CustomerId", "CustomerId1" },
-                values: new object[,]
-                {
-                    { 1L, 1, null },
-                    { 2L, 1, null },
-                    { 3L, 2, null },
-                    { 4L, 2, null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "Id", "Date", "Description", "Location", "Title", "Type", "UserId" },
                 values: new object[,]
@@ -147,10 +136,21 @@ namespace HRManagement.DataAccess.Migrations
                     { 3L, 6, "HR", "sofia.atkinson@red-to-blue.com", "Sofia", "Human Resources", "Atkinson", "0918273465", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 1 }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Documents_CustomerId1",
+            migrationBuilder.InsertData(
                 table: "Documents",
-                column: "CustomerId1");
+                columns: new[] { "Id", "CustomerId" },
+                values: new object[,]
+                {
+                    { 1L, 1L },
+                    { 2L, 1L },
+                    { 3L, 2L },
+                    { 4L, 2L }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Documents_CustomerId",
+                table: "Documents",
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_UserId",

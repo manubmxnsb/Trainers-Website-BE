@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
 using HRManagement.Business.Services;
-using HRManagementApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
 {
-    
     [ApiController]
     [Route("api/[controller]")]
     public class CustomersController : ControllerBase
@@ -29,7 +27,7 @@ namespace HRManagementApi.Controllers
 
         //[Route("{id}")]
         [HttpPost]
-        public async Task<ActionResult> AddNew(CustomerModel customer)
+        public async Task<ActionResult> AddNew(CustomerDto customer)
         {
             var mappedCustomerApi = _mapper.Map<CustomerDto>(customer);
             await _customerService.AddNewCustomer(mappedCustomerApi);

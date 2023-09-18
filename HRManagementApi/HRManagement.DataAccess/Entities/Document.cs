@@ -13,9 +13,9 @@ namespace HRManagement.DataAccess.Entities
         public long Id { get; set; }
 
         [ForeignKey("CustomerId")]
-        public int CustomerId { get; set; }
+        public long CustomerId { get; set; }
         public string Title;
         public DateTime CreationDate;
-        public byte[] Content;
+        public byte[]? Content;
     }
 }
