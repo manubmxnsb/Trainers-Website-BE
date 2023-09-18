@@ -10,7 +10,6 @@ namespace HRManagement.Business.Profiles
         {
             CreateMap<User,UserDto>().ReverseMap();
             CreateMap<Event,EventsDto>().ReverseMap();
-
         }
     }
 }

@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers(options => { options.ReturnHttpNotAcceptable = true; }).AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,11 +30,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
     builder.Configuration["ConnectionStrings:LocalDB"]));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-
-
-
-//builder.Services.AddAutoMapper(typeof(CustomerProfile), typeof(DocumentProfile));
 
 builder.Services.AddControllers(options =>
 {

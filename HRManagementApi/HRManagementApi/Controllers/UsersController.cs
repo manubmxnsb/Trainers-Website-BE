@@ -8,17 +8,17 @@ namespace HRManagementApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _business;
+        private readonly IUserService _userService;
 
         public UsersController(IUserService business)
         {
-            _business = business ?? throw new ArgumentNullException(nameof(business));
+            _userService = business ?? throw new ArgumentNullException(nameof(business));
         }
 
         [HttpGet]
         public async Task<ActionResult> GetUser(long id )
         {
-            var user = await _business.GetUser(id);
+            var user = await _userService.GetUser(id);
             if(user == null)
             {
                 return NotFound();

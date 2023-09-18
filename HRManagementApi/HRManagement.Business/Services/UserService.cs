@@ -16,17 +16,6 @@ namespace HRManagement.Business.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<EventsDto>> GetEvents(long userId)
-        {
-            var events = await _userRepository.GetEventsForUserAsync(userId);
-            return _mapper.Map<IEnumerable<EventsDto>>(events);
-        }
-
-        public async Task<bool> UserExistsAsync(long userId)
-        {
-            return await _userRepository.UserExistsAsync(userId);
-        }
-
         public async Task<UserDto> GetUser(long userID)
         {
             var user = await _userRepository.GetUserAsync(userID);

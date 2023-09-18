@@ -18,15 +18,5 @@ namespace HRManagement.DataAccess.Repositories
         { 
             return await _context.Users.Include(u => u.Events).Where(u => u.Id == userId).FirstOrDefaultAsync();       
         }
-
-        public async Task<bool> UserExistsAsync(long userId)
-        {
-            return await _context.Users.AnyAsync(u => u.Id == userId);
-        }
-
-        public async Task<IEnumerable<Event>> GetEventsForUserAsync(long userId)
-        {
-            return await _context.Events.Where(e => e.UserId == userId).ToListAsync();
-        }
     }
 }
