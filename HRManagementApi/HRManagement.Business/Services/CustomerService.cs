@@ -2,7 +2,6 @@
 using HRManagement.Business.Models;
 using HRManagement.DataAccess.Exceptions;
 using HRManagement.DataAccess.Repositories;
-using Microsoft.IdentityModel.Tokens;
 
 namespace HRManagement.Business.Services
 {
@@ -30,13 +29,13 @@ namespace HRManagement.Business.Services
 
         public async Task DeleteCustomers(List<long> customerIds)
         {
-            if (!customerIds.IsNullOrEmpty())
+            if (customerIds != null && customerIds.Any())
             {
                 await _customerInfoRepository.DeleteCustomers(customerIds);
             }
             else
             {
-                throw new NotFoundException();
+                throw new BadRequestException();
             }
         }
     }

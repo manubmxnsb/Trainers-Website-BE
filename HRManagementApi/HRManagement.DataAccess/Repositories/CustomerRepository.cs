@@ -2,7 +2,6 @@
 using HRManagement.DataAccess.Entities;
 using HRManagement.DataAccess.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace HRManagement.DataAccess.Repositories
 {
@@ -30,15 +29,8 @@ namespace HRManagement.DataAccess.Repositories
         public async Task DeleteCustomers(List<long> customerIds)
         {
             var customers = await _context.Customers.Where(c => customerIds.Contains(c.Id)).ToListAsync();
-            if (!customers.IsNullOrEmpty())
-            {
-                _context.Customers.RemoveRange(customers);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new NotFoundException();
-            }
+            _context.Customers.RemoveRange(customers);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -9,15 +9,20 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
 builder.Configuration["ConnectionStrings:HRManagementDB"]));
+
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IDocumentService, DocumentService>();
+
 builder.Services.AddAutoMapper(typeof(CustomerProfile), typeof(DocumentProfile));
+
 builder.Services.AddControllers(options =>
 {
     options.ReturnHttpNotAcceptable = true;
