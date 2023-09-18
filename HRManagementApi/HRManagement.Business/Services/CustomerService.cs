@@ -26,5 +26,17 @@ namespace HRManagement.Business.Services
         {
             return await _customerInfoRepository.CustomerExistsAsync(cityId);
         }
+
+        public async Task DeleteCustomers(List<long> customerIds)
+        {
+            if (customerIds != null && customerIds.Any())
+            {
+                await _customerInfoRepository.DeleteCustomers(customerIds);
+            }
+            else
+            {
+                throw new BadRequestException();
+            }
+        }
     }
 }
