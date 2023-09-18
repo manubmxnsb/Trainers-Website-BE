@@ -1,11 +1,13 @@
-﻿using HRManagement.Business.Services;
+﻿
+using HRManagement.Business.Models;
+using HRManagement.Business.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/customers/{customerId}/documents")]
     [ApiController]
-    public class DocumentsController : ControllerBase
+    public class DocumentsController : Controller
     {
         private readonly IDocumentService _documentService;
 

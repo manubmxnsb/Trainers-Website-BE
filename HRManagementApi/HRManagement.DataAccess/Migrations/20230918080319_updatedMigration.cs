@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRManagement.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedDB : Migration
+    public partial class updatedMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace HRManagement.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -62,20 +62,17 @@ namespace HRManagement.DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<long>(type: "bigint", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Content = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId1 = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Documents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Documents_Customers_CustomerId",
-                        column: x => x.CustomerId,
+                        name: "FK_Documents_Customers_CustomerId1",
+                        column: x => x.CustomerId1,
                         principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -121,6 +118,17 @@ namespace HRManagement.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Documents",
+                columns: new[] { "Id", "CustomerId", "CustomerId1" },
+                values: new object[,]
+                {
+                    { 1L, 1, null },
+                    { 2L, 1, null },
+                    { 3L, 2, null },
+                    { 4L, 2, null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "Id", "Date", "Description", "Location", "Title", "Type", "UserId" },
                 values: new object[,]
@@ -139,21 +147,10 @@ namespace HRManagement.DataAccess.Migrations
                     { 3L, 6, "HR", "sofia.atkinson@red-to-blue.com", "Sofia", "Human Resources", "Atkinson", "0918273465", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 1 }
                 });
 
-            migrationBuilder.InsertData(
-                table: "Documents",
-                columns: new[] { "Id", "Content", "CreationDate", "CustomerId", "Title" },
-                values: new object[,]
-                {
-                    { 1L, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1L, "Contract" },
-                    { 2L, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1L, "Billing Proof" },
-                    { 3L, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2L, "Billing Proof" },
-                    { 4L, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2L, "Contract" }
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_Documents_CustomerId",
+                name: "IX_Documents_CustomerId1",
                 table: "Documents",
-                column: "CustomerId");
+                column: "CustomerId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_UserId",

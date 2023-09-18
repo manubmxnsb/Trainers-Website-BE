@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagement.DataAccess.Migrations
 {
     [DbContext(typeof(HRManagementDBContext))]
-    [Migration("20230907130543_UpdatedDB")]
-    partial class UpdatedDB
+    [Migration("20230918080319_updatedMigration")]
+    partial class updatedMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,8 @@ namespace HRManagement.DataAccess.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("BillingType")
                         .HasColumnType("int");
@@ -252,23 +253,15 @@ namespace HRManagement.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<byte[]>("Content")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("CustomerId")
+                    b.Property<long?>("CustomerId1")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.ToTable("Documents");
 
@@ -276,34 +269,22 @@ namespace HRManagement.DataAccess.Migrations
                         new
                         {
                             Id = 1L,
-                            Content = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                            CreationDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerId = 1L,
-                            Title = "Contract"
+                            CustomerId = 1
                         },
                         new
                         {
                             Id = 2L,
-                            Content = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                            CreationDate = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerId = 1L,
-                            Title = "Billing Proof"
+                            CustomerId = 1
                         },
                         new
                         {
                             Id = 3L,
-                            Content = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                            CreationDate = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerId = 2L,
-                            Title = "Billing Proof"
+                            CustomerId = 2
                         },
                         new
                         {
                             Id = 4L,
-                            Content = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                            CreationDate = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerId = 2L,
-                            Title = "Contract"
+                            CustomerId = 2
                         });
                 });
 
@@ -452,13 +433,9 @@ namespace HRManagement.DataAccess.Migrations
 
             modelBuilder.Entity("HRManagement.DataAccess.Entities.Document", b =>
                 {
-                    b.HasOne("HRManagement.DataAccess.Entities.Customer", "Customer")
+                    b.HasOne("HRManagement.DataAccess.Entities.Customer", null)
                         .WithMany("Documents")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
+                        .HasForeignKey("CustomerId1");
                 });
 
             modelBuilder.Entity("HRManagement.DataAccess.Entities.Event", b =>

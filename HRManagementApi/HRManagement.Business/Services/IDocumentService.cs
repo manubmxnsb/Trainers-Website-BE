@@ -1,4 +1,6 @@
-﻿namespace HRManagement.Business.Services
+﻿using HRManagement.Business.Models;
+
+namespace HRManagement.Business.Services
 {
     public interface IDocumentService
     {
