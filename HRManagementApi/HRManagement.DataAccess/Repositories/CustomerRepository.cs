@@ -1,6 +1,7 @@
 ﻿using HRManagement.DataAccess.DbContexts;
 using HRManagement.DataAccess.Entities;
 using HRManagement.DataAccess.Exceptions;
+using HRManagement.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HRManagement.DataAccess.Repositories
@@ -20,11 +21,23 @@ namespace HRManagement.DataAccess.Repositories
             return await _context.Customers.AnyAsync(customer => customer.Id == customerId);
         }
 
-        public async Task<IEnumerable<Customer>> GetAllCustomersAsync(int pageNumber, int pageSize)
+        public async Task<IEnumerable<Customer>> GetAllCustomersAsync(PaginationItems paginationItems)
         {
-            var allCustomers = await _context.Customers.Skip(pageSize * (pageNumber - 1))
-                .Take(pageSize)
+            var allCustomers = await _context.Customers.OrderBy(c => c.Name)
+                .Skip(paginationItems.PageSize * (paginationItems.PageNumber - 1))
+                .Take(paginationItems.PageSize)
                 .ToListAsync();
+
+            if (paginationItems.CustomerStatus != null)
+            {
+                allCustomers = allCustomers.Where(c => c.IsActive == paginationItems.CustomerStatus).ToList();
+            }
+
+            if (paginationItems.Search != null)
+            {
+                allCustomers = allCustomers.Where(c => c.Name.Contains(paginationItems.Search)).ToList();
+            }
+
             return allCustomers.Any() ? allCustomers : throw new NotFoundException();   
         }
 

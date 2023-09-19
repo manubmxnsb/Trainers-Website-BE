@@ -1,4 +1,5 @@
 ﻿using HRManagement.DataAccess.Entities;
+using HRManagement.DataAccess.Models;
 
 namespace HRManagement.DataAccess.Repositories
 {
@@ -9,6 +10,6 @@ namespace HRManagement.DataAccess.Repositories
         Task<bool> CustomerExistsAsync(long cityId);
 
         Task<IEnumerable<Customer>> GetAllCustomersAsync(
-            int pageNumber, int pageSize);
+            PaginationItems paginationItems);
     }
 }

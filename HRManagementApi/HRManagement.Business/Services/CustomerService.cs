@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
+using HRManagement.DataAccess.Models;
 using HRManagement.DataAccess.Repositories;
 
 namespace HRManagement.Business.Services
@@ -22,9 +23,9 @@ namespace HRManagement.Business.Services
         }
 
         public async Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(
-            int pageNumber, int pageSize)
+            PaginationItems paginationItems)
         {
-            var allCustomers = await _customerInfoRepository.GetAllCustomersAsync(pageNumber, pageSize);
+            var allCustomers = await _customerInfoRepository.GetAllCustomersAsync(paginationItems);
             var mappedAllCustomers = allCustomers.Select(_mapper.Map<CustomerSummaryDto>);
             return mappedAllCustomers;
         }

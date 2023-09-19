@@ -20,7 +20,6 @@ builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbConte
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<IDocumentService, DocumentService>();
 
 
 builder.Services.AddAutoMapper(typeof(CustomerProfile), typeof(DocumentProfile));

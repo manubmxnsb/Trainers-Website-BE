@@ -1,4 +1,4 @@
-﻿using HRManagement.DataAccess.Enums;
+﻿using HRManagement.Business.Enums;
 
 namespace HRManagement.Business.Models
 {
