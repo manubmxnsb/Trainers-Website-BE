@@ -28,10 +28,6 @@ namespace HRManagementApi.Controllers
         public async Task<ActionResult> EditCustomer(
             CustomerDto customerToUpdate)
         {
-            if(!await _customerService.CustomerExists(customerToUpdate.Id))
-            {
-                throw new NotFoundException();
-            }
             await _customerService.EditCustomer(customerToUpdate);
             return NoContent();
         }

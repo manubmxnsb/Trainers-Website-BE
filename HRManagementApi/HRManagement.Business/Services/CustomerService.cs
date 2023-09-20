@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
 using HRManagement.DataAccess.Entities;
+using HRManagement.DataAccess.Exceptions;
 using HRManagement.DataAccess.Repositories;
 
 namespace HRManagement.Business.Services
@@ -29,6 +30,10 @@ namespace HRManagement.Business.Services
 
         public async Task EditCustomer(CustomerDto customerToUpdate)
         {
+            if (!await _customerInfoRepository.CustomerExistsAsync(customerToUpdate.Id))
+            {
+                throw new NotFoundException();
+            }
             var customerEdit = _mapper.Map<Customer>(customerToUpdate);
             await _customerInfoRepository.EditCustomer(customerEdit);
         }
