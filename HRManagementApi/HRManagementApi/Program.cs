@@ -17,8 +17,8 @@ builder.Services.AddSwaggerGen(options =>
     options.CustomSchemaIds(type => type.ToString());
 });
 
-//builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
-//    builder.Configuration["ConnectionStrings:HRManagementDB"]));
+builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbContextOptions.UseSqlServer(
+builder.Configuration["ConnectionStrings:HRManagementDB"]));
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
@@ -31,6 +31,8 @@ builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbConte
     builder.Configuration["ConnectionStrings:LocalDB"]));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddAutoMapper(typeof(CustomerProfile), typeof(DocumentProfile));
+
 builder.Services.AddControllers(options =>
 {
     options.ReturnHttpNotAcceptable = true;
@@ -38,7 +40,6 @@ builder.Services.AddControllers(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -1,5 +1,4 @@
-﻿
-using HRManagement.Business.Exceptions;
+﻿using HRManagement.DataAccess.Exceptions;
 using HRManagement.Business.Models;
 using System.Net;
 
@@ -9,13 +8,11 @@ namespace HRManagementApi.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
-        //Constructor & Dependency Injection
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             _logger = logger;
             _next = next;
         }
-        // Proccedes with task if successfull or fires custom exception if failure
         public async Task InvokeAsync(HttpContext httpContext)
         {
             try
@@ -29,12 +26,11 @@ namespace HRManagementApi.Middleware
             }
         }
 
-        private async Task HandleExceptionAsync(HttpContext context, Exception ex)
+        private async Task HandleExceptionAsync(HttpContext httpContext, Exception ex)
         {
-            context.Response.ContentType = "application/json";
-            int statusCode = context.Response.StatusCode;
+            httpContext.Response.ContentType = "application/json";
+            int statusCode = httpContext.Response.StatusCode;
             string message = ex.Message;
-            //Custom Error Messages based on the exception type
             switch(ex)
             {
                 case NotFoundException _:
@@ -43,11 +39,16 @@ namespace HRManagementApi.Middleware
                     break;
                 case BadRequestException _:
                     statusCode = (int)HttpStatusCode.BadRequest;
-                    message = "Bad Request. Try changing the value type.";
+                    message = "Bad Request.";
+                    break;
+                default:
+                    statusCode = (int)HttpStatusCode.InternalServerError;
+                    message = ex.Message;
                     break;
             };
+            httpContext.Response.StatusCode = statusCode;
 
-            await context.Response.WriteAsync(new ErrorDetails()
+            await httpContext.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = statusCode,
                 Message = message
