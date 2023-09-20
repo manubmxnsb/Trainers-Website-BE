@@ -13,7 +13,7 @@ namespace HRManagement.DataAccess.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task DeleteDocumentsAsync(long documentId)
+        public async Task DeleteDocumentAsync(long documentId)
         {
             var documentToBeDeleted = await _context.Documents.Where(c => c.Id == documentId).FirstOrDefaultAsync();
             if (documentToBeDeleted != null)
@@ -23,7 +23,7 @@ namespace HRManagement.DataAccess.Repositories
             }
             else
             {
-                throw new InvalidOperationException($"No Customer with customer Id: {documentId} was found!");
+                throw new InvalidOperationException($"No Document with the Id: {documentId} was found!");
             }
         }
     }

@@ -16,9 +16,9 @@ namespace HRManagement.Business.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
        
-        public async Task DeleteDocuments(long documentsId)
+        public async Task DeleteDocument(long documentId)
         {
-            await _documentRepository.DeleteDocumentsAsync(documentsId);
+            await _documentRepository.DeleteDocumentAsync(documentId);
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
 {
-    [Route("api/customers/{customerId}/documents")]
+    [Route("api/Documents")]
     [ApiController]
     public class DocumentsController : Controller
     {
@@ -16,10 +16,10 @@ namespace HRManagementApi.Controllers
             _documentService = documentService ?? throw new ArgumentNullException(nameof(documentService));
         }
 
-        [HttpDelete("/{customerId}/documentsDelete")]
-        public async Task<ActionResult> DeleteDocumentsOnEdit(long documentsId)
+        [HttpDelete("Delete/{documentId}")]
+        public async Task<ActionResult> DeleteDocumentOnEdit(long documentId)
         {
-            await _documentService.DeleteDocuments(documentsId);
+            await _documentService.DeleteDocument(documentId);
             return Ok();
         }
     }

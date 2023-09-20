@@ -11,11 +11,10 @@ namespace HRManagement.Business.Services
         private readonly ICustomerRepository _customerInfoRepository;
         private readonly IMapper _mapper;
 
-        public CustomerService(ICustomerRepository dbRepository, IMapper mapper)
+        public CustomerService(ICustomerRepository customerInfoRepository, IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _mapper = mapper;
-            _customerInfoRepository = dbRepository;
+            _customerInfoRepository = customerInfoRepository ?? throw new ArgumentNullException(nameof(customerInfoRepository));
         }
 
         public async Task<CustomerDto> GetCustomer(long id)
