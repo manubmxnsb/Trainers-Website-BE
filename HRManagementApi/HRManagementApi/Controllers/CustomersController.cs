@@ -32,5 +32,12 @@ namespace HRManagementApi.Controllers
             await _customerService.AddNewCustomer(mappedCustomerApi);
             return Ok();
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteCustomers([FromBody] List<long> customerIds)
+        {
+            await _customerService.DeleteCustomers(customerIds);
+            return Ok();
+        }
     }
 }

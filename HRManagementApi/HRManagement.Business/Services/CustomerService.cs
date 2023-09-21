@@ -32,5 +32,17 @@ namespace HRManagement.Business.Services
             var mappedCustomerBusiness = _mapper.Map<Customer>(customer);
             await _customerInfoRepository.AddNewCustomerAsync(mappedCustomerBusiness);
         }
+
+        public async Task DeleteCustomers(List<long> customerIds)
+        {
+            if (customerIds != null && customerIds.Any())
+            {
+                await _customerInfoRepository.DeleteCustomers(customerIds);
+            }
+            else
+            {
+                throw new BadRequestException();
+            }
+        }
     }
 }
