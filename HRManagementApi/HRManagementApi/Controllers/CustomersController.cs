@@ -1,6 +1,5 @@
 ﻿using HRManagement.Business.Models;
 using HRManagement.Business.Services;
-using HRManagement.DataAccess.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
@@ -9,7 +8,6 @@ namespace HRManagementApi.Controllers
     [Route("api/[controller]")]
     public class CustomersController : ControllerBase
     {
-
         private readonly ICustomerService _customerService;
 
         public CustomersController(ICustomerService customerService)
@@ -22,6 +20,13 @@ namespace HRManagementApi.Controllers
         {
             var customer = await _customerService.GetCustomer(id);
             return Ok(customer);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteCustomers([FromBody] List<long> customerIds)
+        {
+            await _customerService.DeleteCustomers(customerIds);
+            return Ok();
         }
 
         [HttpPut("customerEdit")]
