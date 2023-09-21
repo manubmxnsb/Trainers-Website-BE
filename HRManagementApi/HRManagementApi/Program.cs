@@ -29,8 +29,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddAutoMapper(typeof(CustomerProfile), typeof(DocumentProfile));
-
 builder.Services.AddControllers(options =>
 {
     options.ReturnHttpNotAcceptable = true;
