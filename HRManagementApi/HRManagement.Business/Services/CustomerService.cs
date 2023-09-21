@@ -26,6 +26,11 @@ namespace HRManagement.Business.Services
         public async Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(
             PaginationItemsDto paginationItems)
         {
+            if (paginationItems.PageSize <= 0 || paginationItems.PageNumber <= 0)
+            {
+                throw new BadRequestException();
+            }
+
             var mappedPaginationItems = _mapper.Map<PaginationItems>(paginationItems);
             var allCustomers = await _customerInfoRepository.GetAllCustomersAsync(mappedPaginationItems);
             var mappedAllCustomers = allCustomers.Select(_mapper.Map<CustomerSummaryDto>);
