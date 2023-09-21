@@ -29,7 +29,7 @@ namespace HRManagementApi.Controllers
             return Ok();
         }
 
-        [HttpPut("customerEdit")]
+        [HttpPut]
         public async Task<ActionResult> EditCustomer(
             CustomerDto customerToUpdate)
         {
