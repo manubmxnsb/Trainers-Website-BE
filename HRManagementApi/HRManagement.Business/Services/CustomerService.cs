@@ -23,9 +23,10 @@ namespace HRManagement.Business.Services
         }
 
         public async Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(
-            PaginationItems paginationItems)
+            PaginationItemsDto paginationItems)
         {
-            var allCustomers = await _customerInfoRepository.GetAllCustomersAsync(paginationItems);
+            var mappedPaginationItems = _mapper.Map<PaginationItems>(paginationItems);
+            var allCustomers = await _customerInfoRepository.GetAllCustomersAsync(mappedPaginationItems);
             var mappedAllCustomers = allCustomers.Select(_mapper.Map<CustomerSummaryDto>);
             return mappedAllCustomers;
         }

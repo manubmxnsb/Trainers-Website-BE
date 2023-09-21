@@ -1,6 +1,5 @@
 ﻿using HRManagement.Business.Models;
 using HRManagement.Business.Services;
-using HRManagement.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRManagementApi.Controllers
@@ -24,7 +23,7 @@ namespace HRManagementApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(PaginationItems paginationItems)
+        public async Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(PaginationItemsDto paginationItems)
         {
             var allCustomers = await _customerService.GetAllCustomers(paginationItems);
             return allCustomers;

@@ -1,5 +1,4 @@
 ﻿using HRManagement.Business.Models;
-using HRManagement.DataAccess.Models;
 
 namespace HRManagement.Business.Services
 {
@@ -9,6 +8,6 @@ namespace HRManagement.Business.Services
 
         Task<bool> CustomerExists(long cityId);
 
-        Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(PaginationItems paginationItems);
+        Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(PaginationItemsDto paginationItems);
     }
 }

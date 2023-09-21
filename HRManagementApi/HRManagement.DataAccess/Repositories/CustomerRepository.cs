@@ -24,9 +24,15 @@ namespace HRManagement.DataAccess.Repositories
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync(PaginationItems paginationItems)
         {
             var allCustomers = await _context.Customers.OrderBy(c => c.Name)
-                .Skip(paginationItems.PageSize * (paginationItems.PageNumber - 1))
-                .Take(paginationItems.PageSize)
                 .ToListAsync();
+            if(paginationItems.PageSize <= 0 || paginationItems.PageNumber <= 0)
+            {
+                throw new BadRequestException();
+            }
+
+            allCustomers = allCustomers
+                .Skip(paginationItems.PageSize * (paginationItems.PageNumber - 1))
+                .Take(paginationItems.PageSize).ToList();
 
             if (paginationItems.CustomerStatus != null)
             {

@@ -18,7 +18,6 @@ builder.Services.AddDbContext<HRManagementDBContext>(dbContextOptions => dbConte
     builder.Configuration["ConnectionStrings:HRManagementDatabase"]));
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 
