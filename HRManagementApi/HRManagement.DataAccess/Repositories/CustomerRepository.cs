@@ -53,5 +53,12 @@ namespace HRManagement.DataAccess.Repositories
                 .FirstOrDefaultAsync(customer => customer.Id == customerId);
             return customer == null ? throw new NotFoundException() : customer;
         }
+
+        public async Task DeleteCustomers(List<long> customerIds)
+        {
+            var customers = await _context.Customers.Where(c => customerIds.Contains(c.Id)).ToListAsync();
+            _context.Customers.RemoveRange(customers);
+            await _context.SaveChangesAsync();
+        }
     }
 }

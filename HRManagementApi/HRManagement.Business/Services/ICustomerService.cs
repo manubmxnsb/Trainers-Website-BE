@@ -9,5 +9,7 @@ namespace HRManagement.Business.Services
         Task<bool> CustomerExists(long cityId);
 
         Task<IEnumerable<CustomerSummaryDto>> GetAllCustomers(PaginationItemsDto paginationItems);
+
+        Task DeleteCustomers(List<long> customerIds);
     }
 }

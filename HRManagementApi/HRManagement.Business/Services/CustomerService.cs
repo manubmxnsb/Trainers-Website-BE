@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
+using HRManagement.DataAccess.Exceptions;
 using HRManagement.DataAccess.Models;
 using HRManagement.DataAccess.Repositories;
 
@@ -36,5 +37,16 @@ namespace HRManagement.Business.Services
             return await _customerInfoRepository.CustomerExistsAsync(cityId);
         }
 
+        public async Task DeleteCustomers(List<long> customerIds)
+        {
+            if (customerIds != null && customerIds.Any())
+            {
+                await _customerInfoRepository.DeleteCustomers(customerIds);
+            }
+            else
+            {
+                throw new BadRequestException();
+            }
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace HRManagement.DataAccess.Repositories
 
         Task<IEnumerable<Customer>> GetAllCustomersAsync(
             PaginationItems paginationItems);
+
+        Task DeleteCustomers(List<long> customerIds);
     }
 }

@@ -28,5 +28,12 @@ namespace HRManagementApi.Controllers
             var allCustomers = await _customerService.GetAllCustomers(paginationItems);
             return allCustomers;
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteCustomers([FromBody] List<long> customerIds)
+        {
+            await _customerService.DeleteCustomers(customerIds);
+            return Ok();
+        }
     }
 }
