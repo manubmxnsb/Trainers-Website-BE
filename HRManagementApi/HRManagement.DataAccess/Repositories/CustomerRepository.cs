@@ -32,5 +32,11 @@ namespace HRManagement.DataAccess.Repositories
             _context.Customers.RemoveRange(customers);
             await _context.SaveChangesAsync();
         }
+
+        public async Task AddNewCustomerAsync(Customer newCustomer)
+        {
+            var customersAdded = await _context.Customers.AddAsync(newCustomer);
+            await _context.SaveChangesAsync();
+        }
     }
 }

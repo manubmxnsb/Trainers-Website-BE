@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HRManagement.Business.Models;
+using HRManagement.DataAccess.Entities;
 using HRManagement.DataAccess.Exceptions;
 using HRManagement.DataAccess.Repositories;
 
@@ -19,12 +20,11 @@ namespace HRManagement.Business.Services
         public async Task<CustomerDto> GetCustomer(long id)
         {
             var customer = await _customerInfoRepository.GetCustomerAsync(id);
+            if (customer == null)
+            {
+                throw new NotFoundException();
+            }
             return _mapper.Map<CustomerDto>(customer);
-        }
-
-        public async Task<bool> CustomerExists(long cityId)
-        {
-            return await _customerInfoRepository.CustomerExistsAsync(cityId);
         }
 
         public async Task DeleteCustomers(List<long> customerIds)
@@ -37,6 +37,12 @@ namespace HRManagement.Business.Services
             {
                 throw new BadRequestException();
             }
+        }
+
+        public async Task AddNewCustomer(CustomerDto customer)
+        {
+            var mappedCustomerBusiness = _mapper.Map<Customer>(customer);
+            await _customerInfoRepository.AddNewCustomerAsync(mappedCustomerBusiness);
         }
     }
 }

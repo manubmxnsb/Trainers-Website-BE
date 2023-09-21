@@ -12,5 +12,19 @@ namespace HRManagement.DataAccess.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
+        public async Task DeleteDocumentAsync(long documentId)
+        {
+            var documentToBeDeleted = await _context.Documents.Where(c => c.Id == documentId).FirstOrDefaultAsync();
+            if (documentToBeDeleted != null)
+            {
+                _context.Documents.Remove(documentToBeDeleted);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException($"No Document with the Id: {documentId} was found!");
+            }
+        }
     }
 }

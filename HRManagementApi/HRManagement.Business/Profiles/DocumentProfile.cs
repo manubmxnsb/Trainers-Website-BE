@@ -7,7 +7,7 @@ namespace HRManagement.Business.Profiles
     {
         public DocumentProfile() 
         {
-            CreateMap<Document, Models.DocumentDto>();
+            CreateMap<Document, Models.DocumentDto>().ReverseMap();
         }
         
     }
