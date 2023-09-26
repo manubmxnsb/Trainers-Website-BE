@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRManagement.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedDB : Migration
+    public partial class UpdatedMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

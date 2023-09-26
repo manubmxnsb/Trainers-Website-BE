@@ -8,7 +8,7 @@ namespace HRManagement.DataAccess.Profiles
     {
         public CustomerProfile() 
         {
-            CreateMap<Customer, CustomerDto>();
+            CreateMap<Customer, CustomerDto>().ReverseMap();
         }
     }
 }
