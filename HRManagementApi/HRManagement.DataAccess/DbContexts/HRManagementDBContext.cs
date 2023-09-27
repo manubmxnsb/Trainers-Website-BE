@@ -1,5 +1,6 @@
 ﻿using HRManagement.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+using HRManagement.DataAccess.Enums;
 
 namespace HRManagement.DataAccess.DbContexts
 {
