@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRManagement.DataAccess.Migrations
 {
     [DbContext(typeof(HRManagementDBContext))]
-    [Migration("20230907130945_UpdatedDB")]
-    partial class UpdatedDB
+    [Migration("20230921113101_UpdatedMigration")]
+    partial class UpdatedMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
