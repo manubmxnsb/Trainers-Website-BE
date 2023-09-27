@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HRManagement.DataAccess.Entities
 {
     public class Document
@@ -12,6 +11,7 @@ namespace HRManagement.DataAccess.Entities
 
         [ForeignKey("CustomerId")]
         public Customer? Customer { get; set; }
+
         public long CustomerId { get; set; }
 
         public string Title { get; set; }
@@ -19,6 +19,5 @@ namespace HRManagement.DataAccess.Entities
         public DateTime CreationDate { get; set; }
 
         public byte[] Content { get; set; }
-
     }
 }

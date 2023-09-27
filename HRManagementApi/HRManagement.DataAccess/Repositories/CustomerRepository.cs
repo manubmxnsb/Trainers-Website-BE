@@ -23,7 +23,6 @@ namespace HRManagement.DataAccess.Repositories
 
             _context.Customers.Update(customerToUpdate);
             await _context.SaveChangesAsync();
-
         }
 
         public async Task<bool> CustomerExistsAsync(long customerId)
